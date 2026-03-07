@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { createSupabaseClient } from '@/lib/supabase-client'
@@ -11,7 +11,7 @@ const DASHBOARD_BY_TYPE: Record<string, string> = {
   brand: '/brand',
 }
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const nextUrl = searchParams.get('next') || '/'
@@ -77,5 +77,13 @@ export default function LoginPage() {
         계정이 없으신가요? <Link href="/signup" className="text-abu-pink hover:underline">회원가입</Link>
       </p>
     </div>
+  )
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="max-w-sm mx-auto py-20 px-4 animate-pulse">로딩 중...</div>}>
+      <LoginForm />
+    </Suspense>
   )
 }
