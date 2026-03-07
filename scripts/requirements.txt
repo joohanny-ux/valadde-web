@@ -1,0 +1,10 @@
+# 엑셀 → DB 이관 스크립트용
+pandas>=2.0.0
+openpyxl>=3.1.0
+python-dotenv>=1.0.0
+
+# Supabase (권장)
+supabase>=2.0.0
+
+# Firestore (선택)
+# firebase-admin>=6.2.0
