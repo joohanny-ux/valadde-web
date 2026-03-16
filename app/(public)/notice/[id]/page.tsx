@@ -17,15 +17,15 @@ export default async function NoticeDetailPage({
   if (error || !notice) notFound()
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-12">
-      <Link href="/notice" className="text-sm text-abu-pink hover:underline mb-6 inline-block">
+    <div className="mx-auto max-w-4xl px-4 py-12">
+      <Link href="/notice" className="mb-6 inline-block text-sm text-neutral-500 hover:text-neutral-900">
         ← 목록으로
       </Link>
-      <h1 className="font-serif text-2xl md:text-3xl font-bold mb-4">{notice.title}</h1>
-      <p className="text-sm text-white/60 mb-8">
+      <h1 className="mb-4 text-4xl font-semibold tracking-tight text-neutral-900">{notice.title}</h1>
+      <p className="mb-8 text-sm text-neutral-500">
         {new Date(notice.created_at).toLocaleDateString('ko-KR')}
       </p>
-      <div className="prose prose-invert max-w-none whitespace-pre-wrap text-white/80">
+      <div className="prose max-w-none whitespace-pre-wrap text-neutral-700">
         {notice.content || ''}
       </div>
     </div>

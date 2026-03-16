@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products | Valadde</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light">
+
+    <!-- Sticky Header -->
+    <header class="header" id="header">
+        <div class="header-container container">
+            <a href="index.html" class="logo">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img">
+            </a>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="products.html" class="nav-link active">Products</a></li>
+                    <li><a href="index.html#creators" class="nav-link">For Creators</a></li>
+                    <li><a href="index.html#buyers" class="nav-link">For Buyers</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-text btn-sm">Log In</button>
+                    <button class="btn btn-primary btn-sm">Sign Up</button>
+                    <button class="menu-toggle" aria-label="Toggle menu"><i class="ri-menu-line"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="products-main" style="padding-top: 86px;">
+        
+        <!-- Category Level 1 (Top Tabs) & Level 2 (Pills) -->
+        <section class="category-hierarchy-top">
+            <div class="container">
+                <!-- Level 1: Large Segmented Tabs -->
+                <div class="category-l1-tabs">
+                    <button class="l1-tab active">Cosmetics</button>
+                    <button class="l1-tab">Food & Beverage</button>
+                    <button class="l1-tab">Fashion</button>
+                    <button class="l1-tab">Living Goods</button>
+                </div>
+
+                <!-- Level 2: Pill Tabs -->
+                <div class="category-l2-pills-wrap">
+                    <div class="category-l2-pills">
+                        <button class="l2-pill">All</button>
+                        <button class="l2-pill active">Make Up</button>
+                        <button class="l2-pill">Skin Care</button>
+                        <button class="l2-pill">Body Care</button>
+                        <button class="l2-pill">Men's Care</button>
+                        <button class="l2-pill">Hair Care</button>
+                        <button class="l2-pill">Perfume</button>
+                        <button class="l2-pill">Tools</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Layout: Sidebar (L3 + Filters) + Product Grid -->
+        <section class="products-layout-sec section" style="padding: 2rem 0 6rem;">
+            <div class="container products-layout">
+                
+                <!-- LEFT COLUMN: Sidebar -->
+                <aside class="products-sidebar">
+                    
+                    <!-- Level 3 Categories -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title">Make Up</h4>
+                        <ul class="category-l3-list">
+                            <li><button class="l3-item">All</button></li>
+                            <li><button class="l3-item active">Base</button></li>
+                            <li><button class="l3-item">Lip</button></li>
+                            <li><button class="l3-item">Eye</button></li>
+                            <li><button class="l3-item">Nail</button></li>
+                            <li><button class="l3-item">Blusher / Highlighter</button></li>
+                        </ul>
+                    </div>
+
+                    <hr class="sidebar-divider">
+
+                    <!-- General Filters -->
+                    <div class="sidebar-widget">
+                        <h4 class="widget-title border-none">Filters</h4>
+                        
+                        <!-- Search Bar -->
+                        <div class="sidebar-search mb-4">
+                            <i class="ri-search-2-line"></i>
+                            <input type="text" placeholder="Search products...">
+                        </div>
+
+                        <!-- Filter Group -->
+                        <div class="filter-group">
+                            <label class="filter-label">Brand</label>
+                            <select class="filter-select">
+                                <option>All Brands</option>
+                                <option>AURA BEAUTY</option>
+                                <option>LUMINA</option>
+                                <option>VELVET KISS</option>
+                            </select>
+                        </div>
+
+                        <!-- Checkbox Filters -->
+                        <div class="filter-checkboxes mt-4">
+                            <label class="checkbox-label">
+                                <input type="checkbox" checked>
+                                <span><i class="ri-truck-line text-muted"></i> Export Ready</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox">
+                                <span><i class="ri-box-3-line text-muted"></i> Sample Available</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox">
+                                <span><i class="ri-hand-coin-line text-muted"></i> Negotiable</span>
+                            </label>
+                        </div>
+
+                        <div class="filter-group mt-4">
+                            <label class="filter-label">MOQ</label>
+                            <select class="filter-select">
+                                <option>Any MOQ</option>
+                                <option>Under 100</option>
+                                <option>100 - 500</option>
+                                <option>500+</option>
+                            </select>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- RIGHT COLUMN: Content -->
+                <div class="products-content">
+                    
+                    <!-- Content Toolbar -->
+                    <div class="content-toolbar flex-between mb-8">
+                        <div class="result-count">
+                            <span class="text-main fw-600">24</span> <span class="text-muted">products found</span>
+                        </div>
+                        <div class="toolbar-actions">
+                            <select class="toolbar-select">
+                                <option>Sort by: Relevance</option>
+                                <option>Newest Arrivals</option>
+                                <option>Price: Low to High</option>
+                            </select>
+                            <div class="view-toggles">
+                                <a href="products.html" class="view-btn"><i class="ri-grid-fill"></i></a>
+                                <button class="view-btn active"><i class="ri-list-check"></i></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Product List View -->
+                    <div class="products-list-view">
+                        
+                        <!-- List Card 1 -->
+                        <article class="product-list-card-premium">
+                            <div class="list-card-image">
+                                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=600&h=600" alt="Luminous Silk Foundation">
+                            </div>
+                            
+                            <div class="list-card-body">
+                                <div class="list-text-content">
+                                    <div class="list-brand-name text-truncate">AURA BEAUTY</div>
+                                    <h3 class="list-product-name text-truncate">Luminous Silk Foundation - 30ml</h3>
+                                    <p class="list-product-desc text-truncate">Lightweight, glowing finish perfect for high-definition video content. Formulated exclusively for on-screen talent.</p>
+                                </div>
+                                
+                                <div class="list-data-grid">
+                                    <div class="data-row">
+                                        <span class="data-label">Origin</span>
+                                        <span class="data-value">Korea</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">MOQ</span>
+                                        <span class="data-value">500</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Export</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Sample</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-card-actions">
+                                <button class="list-card-save-btn" aria-label="Save Product"><i class="ri-heart-add-line"></i></button>
+                                <button class="btn btn-outline dark-outline btn-full">View Details</button>
+                            </div>
+                        </article>
+
+                        <!-- List Card 2 -->
+                        <article class="product-list-card-premium">
+                            <div class="list-card-image">
+                                <img src="https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80&w=600&h=600" alt="Hydrating Serum">
+                            </div>
+                            
+                            <div class="list-card-body">
+                                <div class="list-text-content">
+                                    <div class="list-brand-name text-truncate">LUMINA</div>
+                                    <h3 class="list-product-name text-truncate">Deep Hydration Serum Set</h3>
+                                    <p class="list-product-desc text-truncate">Intensive 4-week moisture treatment bundle.</p>
+                                </div>
+                                
+                                <div class="list-data-grid">
+                                    <div class="data-row">
+                                        <span class="data-label">Origin</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">MOQ</span>
+                                        <span class="data-value">Negotiable</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Export</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Sample</span>
+                                        <span class="data-value text-success"><i class="ri-check-line"></i> Ready</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-card-actions">
+                                <button class="list-card-save-btn active" aria-label="Saved"><i class="ri-heart-fill"></i></button>
+                                <button class="btn btn-outline dark-outline btn-full">View Details</button>
+                            </div>
+                        </article>
+
+                        <!-- List Card 3 -->
+                        <article class="product-list-card-premium">
+                            <div class="list-card-image">
+                                <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=600&h=600" alt="Matte Lip Kit">
+                            </div>
+                            
+                            <div class="list-card-body">
+                                <div class="list-text-content">
+                                    <div class="list-brand-name text-truncate">VELVET KISS</div>
+                                    <h3 class="list-product-name text-truncate">Signature Matte Lip Kit - 5 Colors</h3>
+                                    <p class="list-product-desc text-truncate">High-pigment, long-lasting lip set designed for diverse beauty markets globally.</p>
+                                </div>
+                                
+                                <div class="list-data-grid">
+                                    <div class="data-row">
+                                        <span class="data-label">Origin</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">MOQ</span>
+                                        <span class="data-value">500</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Export</span>
+                                        <span class="data-value text-success"><i class="ri-check-line"></i> Ready</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Sample</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-card-actions">
+                                <button class="list-card-save-btn" aria-label="Save Product"><i class="ri-heart-add-line"></i></button>
+                                <button class="btn btn-outline dark-outline btn-full">View Details</button>
+                            </div>
+                        </article>
+
+                        <!-- List Card 4 -->
+                        <article class="product-list-card-premium">
+                            <div class="list-card-image">
+                                <img src="https://images.unsplash.com/photo-1570194065650-d99fb4b8f70d?auto=format&fit=crop&q=80&w=600&h=600" alt="Botanical Cleanser">
+                            </div>
+                            
+                            <div class="list-card-body">
+                                <div class="list-text-content">
+                                    <div class="list-brand-name text-truncate">NATURE LAB</div>
+                                    <h3 class="list-product-name text-truncate">Gentle Botanical Cleanser</h3>
+                                    <p class="list-product-desc text-truncate">Vegan formula, cruelty-free, suitable for sensitive skin.</p>
+                                </div>
+                                
+                                <div class="list-data-grid">
+                                    <div class="data-row">
+                                        <span class="data-label">Origin</span>
+                                        <span class="data-value">EU</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">MOQ</span>
+                                        <span class="data-value">Negotiable</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Export</span>
+                                        <span class="data-value text-success"><i class="ri-check-line"></i> Ready</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Sample</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-card-actions">
+                                <button class="list-card-save-btn" aria-label="Save Product"><i class="ri-heart-add-line"></i></button>
+                                <button class="btn btn-outline dark-outline btn-full">View Details</button>
+                            </div>
+                        </article>
+
+                        <!-- List Card 5 -->
+                        <article class="product-list-card-premium">
+                            <div class="list-card-image">
+                                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&q=80&w=600&h=600" alt="Premium Cosmetics">
+                            </div>
+                            
+                            <div class="list-card-body">
+                                <div class="list-text-content">
+                                    <div class="list-brand-name text-truncate">ETHEREAL</div>
+                                    <h3 class="list-product-name text-truncate">Radiant Setting Powder</h3>
+                                    <p class="list-product-desc text-truncate">Ultra-fine milled powder for a flawless, non-cakey finish on camera.</p>
+                                </div>
+                                
+                                <div class="list-data-grid">
+                                    <div class="data-row">
+                                        <span class="data-label">Origin</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">MOQ</span>
+                                        <span class="data-value">Negotiable</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Export</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Sample</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-card-actions">
+                                <button class="list-card-save-btn" aria-label="Save Product"><i class="ri-heart-add-line"></i></button>
+                                <button class="btn btn-outline dark-outline btn-full">View Details</button>
+                            </div>
+                        </article>
+
+                        <!-- List Card 6 (Missing Image Fallback Example) -->
+                        <article class="product-list-card-premium">
+                            <div class="list-card-image">
+                                <div class="img-fallback"><i class="ri-image-line"></i></div>
+                            </div>
+                            
+                            <div class="list-card-body">
+                                <div class="list-text-content">
+                                    <div class="list-brand-name text-truncate">CHROMATICA</div>
+                                    <h3 class="list-product-name text-truncate">Midnight Noir 12-Pan Palette</h3>
+                                    <p class="list-product-desc text-truncate">High-demand editorial eyeshadow palette with intense color payoff.</p>
+                                </div>
+                                
+                                <div class="list-data-grid">
+                                    <div class="data-row">
+                                        <span class="data-label">Origin</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">MOQ</span>
+                                        <span class="data-value">1000</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Export</span>
+                                        <span class="data-value text-success"><i class="ri-check-line"></i> Ready</span>
+                                    </div>
+                                    <div class="data-row">
+                                        <span class="data-label">Sample</span>
+                                        <span class="data-value text-disabled">--</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="list-card-actions">
+                                <button class="list-card-save-btn" aria-label="Save Product"><i class="ri-heart-add-line"></i></button>
+                                <button class="btn btn-outline dark-outline btn-full">View Details</button>
+                            </div>
+                        </article>
+
+                    </div>
+
+                    <!-- Skeleton Loading State (Commented Out for Implementation) -->
+                    <!--
+                    <div class="products-grid products-grid-with-sidebar" style="margin-top: 2rem;">
+                        <article class="product-card-premium" style="border-color: var(--c-border); box-shadow: none;">
+                            <div class="skeleton skeleton-image"></div>
+                            <div class="card-content">
+                                <div class="skeleton skeleton-text short"></div>
+                                <div class="skeleton skeleton-text"></div>
+                                <div class="skeleton skeleton-text"></div>
+                                <div class="skeleton skeleton-text short" style="margin-bottom: auto;"></div>
+                                <div style="padding-top: 0.75rem; border-top: 1px solid var(--c-border); margin-top: 1rem;">
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="product-card-premium" style="border-color: var(--c-border); box-shadow: none;">
+                            <div class="skeleton skeleton-image"></div>
+                            <div class="card-content">
+                                <div class="skeleton skeleton-text short"></div>
+                                <div class="skeleton skeleton-text"></div>
+                                <div class="skeleton skeleton-text"></div>
+                                <div class="skeleton skeleton-text short" style="margin-bottom: auto;"></div>
+                                <div style="padding-top: 0.75rem; border-top: 1px solid var(--c-border); margin-top: 1rem;">
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </article>
+                        <article class="product-card-premium" style="border-color: var(--c-border); box-shadow: none;">
+                            <div class="skeleton skeleton-image"></div>
+                            <div class="card-content">
+                                <div class="skeleton skeleton-text short"></div>
+                                <div class="skeleton skeleton-text"></div>
+                                <div class="skeleton skeleton-text"></div>
+                                <div class="skeleton skeleton-text short" style="margin-bottom: auto;"></div>
+                                <div style="padding-top: 0.75rem; border-top: 1px solid var(--c-border); margin-top: 1rem;">
+                                    <div class="skeleton skeleton-button"></div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    -->
+
+                    <!-- Empty Results State (Commented Out for Implementation) -->
+                    <!--
+                    <div class="empty-state" style="margin-top: 2rem;">
+                        <i class="ri-search-eye-line"></i>
+                        <h3>No products found</h3>
+                        <p>Try adjusting your search or filter criteria.</p>
+                        <button class="btn btn-outline dark-outline mt-4" style="border-radius: var(--radius-pill); padding: 0.5rem 1.5rem;">Clear Filters</button>
+                    </div>
+                    -->
+
+                    <!-- Pagination -->
+                    <div class="pagination-area mt-4 text-center" style="margin-top: 4rem;">
+                        <button class="btn btn-outline btn-lg bg-white" style="border-radius: var(--radius-pill); border-color: var(--c-border); padding: 0.75rem 3rem;">Load More Products</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="footer-minimal section" style="background: white;">
+        <div class="container footer-bottom-bar flex-between" style="border-top: none; padding-top: 0;">
+            <div class="footer-brand">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img" style="height: 24px;">
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 Valadde Inc.
+            </div>
+            <div class="footer-legal-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         PRODUCT DETAIL MODAL
+         ========================================== -->
+    <div class="product-modal-overlay" id="productModal">
+        <div class="product-modal-content">
+            <button class="modal-close-btn" id="closeProductModalBtn">
+                <i class="ri-close-line"></i>
+            </button>
+            
+            <div class="modal-gallery-zone">
+                <img src="" alt="Product Image" id="modalProductImage">
+            </div>
+            
+            <div class="modal-info-zone">
+                <div class="brand-overline" id="modalProductBrand"></div>
+                <h2 class="product-title" id="modalProductTitle"></h2>
+                <p class="product-desc" id="modalProductDesc"></p>
+                
+                <div class="modal-b2b-grid" id="modalProductMeta">
+                    <!-- Dynamic details go here -->
+                </div>
+                
+                <div class="modal-actions">
+                    <button class="btn btn-outline dark-outline">Request Sample</button>
+                    <button class="btn btn-primary dark">Inquire / Negotiate</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

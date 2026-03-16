@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { supabase } from '@/lib/supabase'
+import { requireAdminRequest } from '@/lib/request-auth'
 
 export async function GET(
   _: Request,
@@ -23,6 +24,11 @@ export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const adminError = requireAdminRequest(request)
+  if (adminError) {
+    return adminError
+  }
+
   try {
     const { id } = await params
     const body = await request.json()
@@ -47,9 +53,14 @@ export async function PATCH(
 }
 
 export async function DELETE(
-  _: Request,
+  request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const adminError = requireAdminRequest(request)
+  if (adminError) {
+    return adminError
+  }
+
   try {
     const { id } = await params
     const { error } = await supabase.from('notices').delete().eq('id', id)

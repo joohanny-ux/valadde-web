@@ -1,0 +1,30 @@
+{
+  "products": [
+    {
+      "brand": "JUNGSAEMMOOL",
+      "image": "",
+      "category_1": "COSMETICS",
+      "category_2": "Skin Care",
+      "category_3": "Facial",
+      "name_kr": "정샘물 에센셜 물 스틱",
+      "name_en": "JUNGSAEMMOOL Essential Mool Stick",
+      "name_cn_s": "郑瑄茉 焕颜亮肤精华补水棒",
+      "name_cn_f": "鄭瑄茉 珍珠煥顏亮膚保濕棒",
+      "name_jp": "ジョンセンムル エッセンシャル ムル スティック",
+      "volume": "11g",
+      "quantity_per_carton": 40,
+      "shelf_life_month": 36,
+      "msrp": 32000,
+      "buying_price_-vat": 11636.363636363636,
+      "buying_price_+vat": 12800,
+      "buying_price_rate": 0.4,
+      "product_barcode": "8809826710283",
+      "carton_barcode": "",
+      "country_of_origin": "Republic of Korea",
+      "id": "file_0",
+      "is_display": true,
+      "source": "file"
+    }
+  ],
+  "excludedKeys": []
+}

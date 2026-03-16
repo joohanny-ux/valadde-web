@@ -1,10 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { requireAdminRequest } from '@/lib/request-auth'
 
 export async function PATCH(
   request: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
+  const adminError = requireAdminRequest(request)
+  if (adminError) {
+    return adminError
+  }
+
   try {
     const { id } = await params
     const body = await request.json()

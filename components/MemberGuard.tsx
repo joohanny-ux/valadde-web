@@ -5,6 +5,7 @@ import { useRouter, usePathname } from 'next/navigation'
 import { createSupabaseClient } from '@/lib/supabase-client'
 import MemberHeader from './MemberHeader'
 import PublicFooter from './PublicFooter'
+import MemberSubnav from './member/MemberSubnav'
 
 type UserType = 'creator' | 'buyer' | 'brand'
 
@@ -76,6 +77,7 @@ export function MemberGuard({
   return (
     <div className="min-h-screen flex flex-col">
       <MemberHeader userType={userType} />
+      <MemberSubnav memberType={userType} />
       <main className="flex-1">{children}</main>
       <PublicFooter />
     </div>

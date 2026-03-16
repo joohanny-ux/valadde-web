@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { createSupabaseClient } from '@/lib/supabase-client'
+import MemberPageIntro from '@/components/member/MemberPageIntro'
+import MemberStatusBadge from '@/components/member/MemberStatusBadge'
 
 type Order = {
   id: string
@@ -10,14 +12,6 @@ type Order = {
   status: string
   total_amount: number | null
   created_at: string
-}
-
-const STATUS_LABEL: Record<string, string> = {
-  submitted: '제출됨',
-  confirmed: '확인됨',
-  invoiced: '인보이스',
-  shipped: '배송중',
-  cancelled: '취소',
 }
 
 export default function BuyerOrdersPage() {
@@ -41,58 +35,56 @@ export default function BuyerOrdersPage() {
     load()
   }, [])
 
-  if (loading) return <div className="max-w-4xl mx-auto px-4 py-10">로딩 중...</div>
+  if (loading) return <div className="mx-auto max-w-6xl px-4 py-10">로딩 중...</div>
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <h1 className="text-2xl font-bold mb-6">주문 목록</h1>
-      <p className="text-gray-600 mb-8">
-        주문·인보이스·배송 상태를 확인하세요.
-      </p>
+    <div className="mx-auto max-w-6xl px-4 py-10">
+      <MemberPageIntro
+        title="Orders"
+        description="PO 제출 후 생성된 주문, 인보이스, 배송 상태를 바이어 관점에서 추적합니다."
+      />
 
       {orders.length === 0 ? (
-        <div className="bg-white rounded-lg shadow p-8 border text-center text-gray-500">
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-8 text-center text-neutral-500 shadow-sm">
           <p>주문 내역이 없습니다.</p>
-          <Link href="/products" className="mt-4 inline-block text-blue-600 hover:underline">
+          <Link href="/products" className="mt-4 inline-block text-neutral-900 hover:underline">
             상품 둘러보기 →
           </Link>
         </div>
       ) : (
-        <div className="bg-white rounded-lg shadow overflow-hidden border">
-          <table className="w-full">
-            <thead className="bg-gray-50">
-              <tr>
-                <th className="px-4 py-2 text-left text-sm font-medium">주문번호</th>
-                <th className="px-4 py-2 text-center text-sm font-medium">상태</th>
-                <th className="px-4 py-2 text-right text-sm font-medium">금액</th>
-                <th className="px-4 py-2 text-left text-sm font-medium">등록일</th>
-                <th className="px-4 py-2 text-left text-sm font-medium">작업</th>
-              </tr>
-            </thead>
-            <tbody>
-              {orders.map((o) => (
-                <tr key={o.id} className="border-t hover:bg-gray-50">
-                  <td className="px-4 py-2 font-mono text-sm">{o.id.slice(0, 8)}…</td>
-                  <td className="px-4 py-2 text-center">
-                    <span className="text-sm px-2 py-0.5 rounded bg-gray-100">
-                      {STATUS_LABEL[o.status] ?? o.status}
-                    </span>
-                  </td>
-                  <td className="px-4 py-2 text-right">
-                    {o.total_amount != null ? `${o.total_amount.toLocaleString()}원` : '-'}
-                  </td>
-                  <td className="px-4 py-2 text-sm text-gray-500">
-                    {new Date(o.created_at).toLocaleDateString('ko-KR')}
-                  </td>
-                  <td className="px-4 py-2">
-                    <Link href={`/buyer/orders/${o.id}`} className="text-blue-600 hover:underline text-sm">
-                      상세
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+        <div className="space-y-4">
+          {orders.map((order) => (
+            <article
+              key={order.id}
+              className="grid gap-4 rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm md:grid-cols-[1.1fr_0.9fr_180px]"
+            >
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-400">
+                  {order.order_type || 'order'}
+                </p>
+                <h2 className="mt-2 text-lg font-semibold text-neutral-900">{order.id.slice(0, 8)}...</h2>
+                <p className="mt-2 text-sm text-neutral-500">
+                  생성일 {new Date(order.created_at).toLocaleDateString('ko-KR')}
+                </p>
+              </div>
+
+              <div className="space-y-3">
+                <MemberStatusBadge status={order.status} />
+                <p className="text-sm text-neutral-600">
+                  {order.total_amount != null ? `${order.total_amount.toLocaleString()}원` : '금액 미정'}
+                </p>
+              </div>
+
+              <div className="flex items-center md:justify-end">
+                <Link
+                  href={`/buyer/orders/${order.id}`}
+                  className="inline-flex rounded-full border border-neutral-300 px-4 py-2 text-sm font-medium text-neutral-900 hover:bg-neutral-50"
+                >
+                  상세 보기
+                </Link>
+              </div>
+            </article>
+          ))}
         </div>
       )}
     </div>

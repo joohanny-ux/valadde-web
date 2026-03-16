@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Selected Products | Valadde Creator Area</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body class="bg-light workspace-body">
+
+    <!-- Sticky Header -->
+    <header class="header" id="header">
+        <div class="header-container container">
+            <a href="index.html" class="logo">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img">
+            </a>
+
+            <nav class="nav">
+                <ul class="nav-list">
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="index.html#creators" class="nav-link active fw-600 text-main">For Creators</a></li>
+                    <li><a href="index.html#buyers" class="nav-link">For Buyers</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-text btn-sm">Log In</button>
+                    <button class="btn btn-primary btn-sm">Sign Up</button>
+                    <button class="menu-toggle" aria-label="Toggle menu"><i class="ri-menu-line"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="workspace-main" style="padding-top: 80px; padding-bottom: 6rem;">
+        
+        <!-- Creator Sub-Navigation -->
+        <div class="creator-subnav">
+            <div class="container max-w-5xl mx-auto subnav-container">
+                <div class="subnav-tabs">
+                    <a href="#" class="subnav-tab">My Page</a>
+                    <a href="selected-products.html" class="subnav-tab active">Selected Products</a>
+                    <a href="#" class="subnav-tab">Deals</a>
+                    <a href="#" class="subnav-tab">Payments</a>
+                    <a href="#" class="subnav-tab">Deliveries</a>
+                    <a href="#" class="subnav-tab">Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container max-w-5xl">
+
+            <!-- Page Title Area -->
+            <div class="workspace-header mb-8">
+                <h1 class="page-title text-3xl md:text-4xl form-title">Selected Products</h1>
+                <p class="page-subtitle text-muted mt-2">Review your selections, define your campaign details, and submit a deal request.</p>
+            </div>
+
+            <!-- Main Form Wrapper -->
+            <form class="deal-request-form" action="#" method="POST">
+                
+                <!-- 1. Selected Products Workspace (Table) -->
+                <section class="workspace-card mb-6">
+                    <div class="workspace-card-header flex-between mb-4 border-b pb-4">
+                        <h2 class="section-title text-xl m-0">Review Items</h2>
+                        <span class="badge badge-light m-0">3 Items Selected</span>
+                    </div>
+                    <p class="text-sm text-muted mb-6">Review each selected item carefully before submitting your deal request.</p>
+
+                    <div class="overflow-x-auto">
+                        <table class="workspace-table">
+                            <thead>
+                                <tr>
+                                    <th class="wt-unit">Unit</th>
+                                    <th class="wt-img">Image</th>
+                                    <th class="wt-info">Brand & Product Name</th>
+                                    <th class="wt-price">Retail Price</th>
+                                    <th class="wt-qty">Quantity</th>
+                                    <th class="wt-request">Product-specific Request</th>
+                                    <th class="wt-action">Remove</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Product Row 1 -->
+                                <tr>
+                                    <td class="wt-unit text-sm text-muted">Single</td>
+                                    <td class="wt-img">
+                                        <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=120&h=120" alt="Luminous Silk Foundation">
+                                    </td>
+                                    <td class="wt-info">
+                                        <div class="st-brand text-muted text-xs fw-600 mb-1">AURA BEAUTY</div>
+                                        <div class="st-title text-sm fw-500 m-0">Luminous Silk Foundation - 30ml</div>
+                                    </td>
+                                    <td class="wt-price text-muted">$45.00</td>
+                                    <td class="wt-qty">
+                                        <div class="qty-stepper">
+                                            <button type="button" class="btn-step"><i class="ri-subtract-line"></i></button>
+                                            <input type="number" value="100" min="1" class="qty-input">
+                                            <button type="button" class="btn-step"><i class="ri-add-line"></i></button>
+                                        </div>
+                                    </td>
+                                    <td class="wt-request">
+                                        <input type="text" class="input-minimal" placeholder="E.g., require shade #3 primarily...">
+                                    </td>
+                                    <td class="wt-action">
+                                        <button type="button" class="btn-remove btn-icon" aria-label="Remove item" title="Remove">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Product Row 2 -->
+                                <tr>
+                                    <td class="wt-unit text-sm text-muted">Set</td>
+                                    <td class="wt-img">
+                                        <img src="https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80&w=120&h=120" alt="Deep Hydration Serum Set">
+                                    </td>
+                                    <td class="wt-info">
+                                        <div class="st-brand text-muted text-xs fw-600 mb-1">LUMINA</div>
+                                        <div class="st-title text-sm fw-500 m-0">Deep Hydration Serum Set</div>
+                                    </td>
+                                    <td class="wt-price text-muted">$68.00</td>
+                                    <td class="wt-qty">
+                                        <div class="qty-stepper">
+                                            <button type="button" class="btn-step"><i class="ri-subtract-line"></i></button>
+                                            <input type="number" value="50" min="1" class="qty-input">
+                                            <button type="button" class="btn-step"><i class="ri-add-line"></i></button>
+                                        </div>
+                                    </td>
+                                    <td class="wt-request">
+                                        <input type="text" class="input-minimal" placeholder="Add specific request note...">
+                                    </td>
+                                    <td class="wt-action">
+                                        <button type="button" class="btn-remove btn-icon" aria-label="Remove item" title="Remove">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+
+                                <!-- Product Row 3 -->
+                                <tr>
+                                    <td class="wt-unit text-sm text-muted">Kit</td>
+                                    <td class="wt-img">
+                                        <div class="wt-img-placeholder flex-center bg-gray-100 rounded text-muted">
+                                            <i class="ri-image-line text-xl"></i>
+                                        </div>
+                                    </td>
+                                    <td class="wt-info">
+                                        <div class="st-brand text-muted text-xs fw-600 mb-1">VELVET KISS</div>
+                                        <div class="st-title text-sm fw-500 m-0">Signature Matte Lip Kit - 5 Colors</div>
+                                    </td>
+                                    <td class="wt-price text-muted">$32.00</td>
+                                    <td class="wt-qty">
+                                        <div class="qty-stepper">
+                                            <button type="button" class="btn-step"><i class="ri-subtract-line"></i></button>
+                                            <input type="number" value="200" min="1" class="qty-input">
+                                            <button type="button" class="btn-step"><i class="ri-add-line"></i></button>
+                                        </div>
+                                    </td>
+                                    <td class="wt-request">
+                                        <input type="text" class="input-minimal" placeholder="Add specific request note...">
+                                    </td>
+                                    <td class="wt-action">
+                                        <button type="button" class="btn-remove btn-icon" aria-label="Remove item" title="Remove">
+                                            <i class="ri-delete-bin-line"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 2. Creator Campaign / Deal Planning Area -->
+                <section class="workspace-card mb-6">
+                    <h2 class="section-title text-xl mb-6 border-b pb-4">Deal Planning</h2>
+                    
+                    <div class="form-grid mb-6">
+                        <!-- Campaign Start Date -->
+                        <div class="form-group">
+                            <label class="form-label" for="startDate">When will you do this deal?</label>
+                            <input type="date" id="startDate" class="form-control" required>
+                        </div>
+
+                        <!-- Duration -->
+                        <div class="form-group">
+                            <label class="form-label" for="duration">How long will you do this deal?</label>
+                            <select id="duration" class="form-control" required>
+                                <option value="" disabled selected>Select duration...</option>
+                                <option value="1_day">1 Day Event</option>
+                                <option value="3_days">3 Days</option>
+                                <option value="1_week">1 Week (Standard Campaign)</option>
+                                <option value="2_weeks">2 Weeks</option>
+                                <option value="ongoing">Ongoing / Always-on</option>
+                            </select>
+                        </div>
+
+                        <!-- Sales Channel -->
+                        <div class="form-group">
+                            <label class="form-label" for="salesChannel">What is your sales method?</label>
+                            <select id="salesChannel" class="form-control" required>
+                                <option value="" disabled selected>Select method...</option>
+                                <option value="instagram_live">Instagram Live Commerce</option>
+                                <option value="tiktok_shop">TikTok Shop Video/Live</option>
+                                <option value="youtube">YouTube Dedicated Video</option>
+                                <option value="group_buy">Private Group Buy / Community</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- General Requests / Notes -->
+                    <div class="form-group">
+                        <label class="form-label" for="generalNotes">Requests (Applies to all selected products)</label>
+                        <textarea id="generalNotes" class="form-control" rows="5" placeholder="Briefly describe your audience, past success, or specific requests for margins, samples, and collateral..."></textarea>
+                    </div>
+                </section>
+
+                <!-- 3. Primary Actions Area -->
+                <div class="form-actions-bar sticky-bottom p-4 md:p-6 shadow-colored mt-8 flex-between">
+                    <div class="action-secondary flex gap-4">
+                        <button type="button" class="btn btn-outline dark-outline">Save Draft</button>
+                        <button type="button" class="btn btn-text text-muted hover-text-danger">Delete Selected</button>
+                    </div>
+                    
+                    <div class="action-primary">
+                        <button type="submit" class="btn btn-primary btn-lg shadow-md px-10">Request Deal <i class="ri-arrow-right-line"></i></button>
+                    </div>
+                </div>
+
+            </form>
+
+            <!-- 4. Add More Products Block (Outside the form since it's a separate flow) -->
+            <section class="workspace-card-secondary mt-12">
+                <div class="workspace-card-header mb-6">
+                    <h2 class="section-title text-xl m-0">Add More Products</h2>
+                </div>
+
+                <!-- Compact Search Bar -->
+                <div class="compact-search-bar">
+                    <input type="text" class="form-control" placeholder="Product Name">
+                    <input type="text" class="form-control" placeholder="Brand">
+                    <select class="form-control">
+                        <option value="">Any Category</option>
+                        <option value="skincare">Skincare</option>
+                        <option value="makeup">Makeup</option>
+                        <option value="haircare">Haircare</option>
+                    </select>
+                    <button type="button" class="btn btn-dark">Search</button>
+                </div>
+
+                <!-- Add Results Count -->
+                <p class="text-sm fw-600 text-muted mb-4 border-b pb-2">24 Results Found</p>
+
+                <!-- Simple Search Results Table -->
+                <div class="overflow-x-auto">
+                    <table class="workspace-table table-hoverable">
+                        <thead>
+                            <tr>
+                                <th class="wt-img">Image</th>
+                                <th class="wt-info">Brand & Product Name</th>
+                                <th class="wt-price">Retail Price</th>
+                                <th class="wt-action" style="width:100px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="wt-img">
+                                    <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=120&h=120" alt="Rose Water Toner">
+                                </td>
+                                <td class="wt-info">
+                                    <div class="st-brand text-muted text-xs fw-600 mb-1">PETAL</div>
+                                    <div class="st-title text-sm fw-500 m-0">Rose Water Calming Toner</div>
+                                </td>
+                                <td class="wt-price text-muted">$28.00</td>
+                                <td class="wt-action">
+                                    <button type="button" class="btn btn-outline btn-sm shadow-sm py-1 px-3">Add</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="wt-img">
+                                    <img src="https://images.unsplash.com/photo-1549386377-51203bbafe25?auto=format&fit=crop&q=80&w=120&h=120" alt="Exfoliating Scrub">
+                                </td>
+                                <td class="wt-info">
+                                    <div class="st-brand text-muted text-xs fw-600 mb-1">MARINE</div>
+                                    <div class="st-title text-sm fw-500 m-0">Deep Sea Exfoliating Scrub</div>
+                                </td>
+                                <td class="wt-price text-muted">$35.00</td>
+                                <td class="wt-action">
+                                    <button type="button" class="btn btn-outline btn-sm shadow-sm py-1 px-3">Add</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="footer-minimal section" style="background: white; padding-bottom: 8rem;">
+        <div class="container footer-bottom-bar flex-between" style="border-top: none; padding-top: 0;">
+            <div class="footer-brand">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img" style="height: 24px;">
+            </div>
+            <div class="footer-copyright">
+                &copy; 2026 Valadde Inc.
+            </div>
+            <div class="footer-legal-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

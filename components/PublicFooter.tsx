@@ -1,148 +1,189 @@
 import Link from 'next/link'
-import Image from 'next/image'
-import { supabase } from '@/lib/supabase'
+import AbuLogo from './AbuLogo'
 
-export default async function PublicFooter() {
-  const { data: notices } = await supabase
-    .from('notices')
-    .select('id, title, created_at')
-    .order('is_pinned', { ascending: false })
-    .order('created_at', { ascending: false })
-    .limit(4)
+export default function PublicFooter() {
+  const text = {
+    contactTitle: 'Contact Us',
+    emailLabel: 'Email',
+    emails: ['contact@answerbybeauty.com', 'answerbybeauty@gmail.com'],
+    faq: 'FAQ',
+    qa: 'Q&A',
+
+    noticesTitle: 'Notices',
+    noticesMore: '+',
+    notices: [
+      {
+        title: '[공지] 영상정보처리기기 운영·관리 방침 변경 안내',
+        date: '2026.03.09',
+      },
+      {
+        title: '[공지] LGU+ 휴대폰본인확인 서비스 일시중단 안내',
+        date: '2026.03.09',
+      },
+      {
+        title: '[공지] 3/9(월) 신세계 포인트 시스템 점검 안내',
+        date: '2026.03.09',
+      },
+      {
+        title: '[공지] 시코르닷컴 3/2(월) 대체공휴일 휴무 안내',
+        date: '2026.03.09',
+      },
+    ],
+
+    snsTitle: 'SNS',
+    instagram: 'Instagram',
+
+    footerLinks: [
+      { label: 'About Us', href: '/about' },
+      { label: 'Products', href: '/products' },
+      { label: 'Brands', href: '/brands' },
+      { label: '이용약관', href: '/terms' },
+      { label: '개인정보처리방침', href: '/privacy' },
+    ],
+
+    companyNameEn: 'ABU Co., Ltd.',
+    companyNameKo: '(주)에이뷰',
+    ceoLabel: 'CEO',
+    ceoName: 'Min Dae Sik',
+    licenseLabel: 'Business License No.',
+    licenseValue: '',
+    address: 'A-401, 235, Toegye-ro, Jung-gu, Seoul, Republic of Korea 04558',
+    copyright: '© ABU ALL RIGHTS RESERVED',
+  }
 
   return (
-    <footer className="mt-auto bg-white font-sans text-gray-900 leading-none">
-      {/* Top Section: Contact, Notice, SNS - equal horizontal spacing */}
-      <div className="max-w-6xl mx-auto px-10 py-2.5">
-        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-x-12 gap-y-4">
-          {/* Contact Us */}
-          <div className="flex flex-col">
-            <h3 className="font-bold text-xs mb-1.5 text-gray-900">Contact Us</h3>
-            <div className="space-y-0 text-[11px] text-gray-600 leading-none">
-              <p className="font-medium text-gray-500 text-[10px]">Email</p>
-              <a href="mailto:contact@answerbybeauty.com" className="block hover:underline">
-                contact@answerbybeauty.com
-              </a>
-              <a href="mailto:answerbybeauty@gmail.com" className="block hover:underline">
-                answerbybeauty@gmail.com
-              </a>
+    <footer className="border-t border-neutral-200 bg-white text-neutral-900">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        {/* Top Row */}
+        <div className="grid gap-8 py-9 lg:grid-cols-[1fr_1.6fr_0.65fr]">
+          {/* Contact */}
+          <section>
+            <div className="border-b border-neutral-300 pb-2.5">
+              <h3 className="text-[19px] font-semibold tracking-tight text-neutral-800">
+                {text.contactTitle}
+              </h3>
             </div>
-            <div className="flex gap-2 mt-1.5">
+
+            <div className="mt-4 flex gap-3">
+              <div className="min-w-[48px] text-[14px] font-semibold text-neutral-800">
+                {text.emailLabel}
+              </div>
+
+              <div className="space-y-0.5 text-[14px] font-medium leading-6 text-neutral-700">
+                {text.emails.map((email) => (
+                  <p key={email}>{email}</p>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-3">
               <Link
                 href="/faq"
-                className="inline-flex items-center justify-center min-w-[72px] px-3 py-1.5 text-[11px] font-medium border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+                className="inline-flex min-w-[88px] items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-[14px] font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
               >
-                FAQ
+                {text.faq}
               </Link>
+
               <Link
                 href="/contact"
-                className="inline-flex items-center justify-center min-w-[72px] px-3 py-1.5 text-[11px] font-medium border border-gray-300 rounded hover:bg-gray-50 transition-colors"
+                className="inline-flex min-w-[88px] items-center justify-center rounded-full border border-neutral-300 bg-white px-4 py-2 text-[14px] font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
               >
-                CONTACT
+                {text.qa}
               </Link>
             </div>
-          </div>
+          </section>
 
-          {/* 공지사항 */}
-          <div className="flex flex-col">
-            <div className="flex items-center justify-between border-b border-gray-200 pb-1 mb-2">
-              <h3 className="font-bold text-xs text-gray-900">공지사항</h3>
-              <Link href="/notice" className="text-gray-400 hover:text-gray-600" aria-label="공지사항 전체보기">
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
+          {/* Notices */}
+          <section>
+            <div className="flex items-center justify-between border-b border-neutral-300 pb-2.5">
+              <h3 className="text-[19px] font-semibold tracking-tight text-neutral-800">
+                {text.noticesTitle}
+              </h3>
+
+              <Link
+                href="/notice"
+                className="text-[28px] font-semibold leading-none text-neutral-800 transition-opacity hover:opacity-60"
+                aria-label="View more notices"
+              >
+                {text.noticesMore}
               </Link>
             </div>
-            <ul className="space-y-0 text-[11px] text-gray-600 leading-none">
-              {(notices ?? []).length === 0 ? (
-                <li className="text-gray-400">등록된 공지가 없습니다.</li>
-              ) : (
-                (notices ?? []).map((n) => (
-                  <li key={n.id}>
-                    <Link href={`/notice/${n.id}`} className="hover:underline block">
-                      {n.title}
-                    </Link>
-                  </li>
-                ))
-              )}
-            </ul>
-          </div>
+
+            <div className="mt-4 space-y-1">
+              {text.notices.map((notice) => (
+                <div
+                  key={`${notice.title}-${notice.date}`}
+                  className="grid grid-cols-[1fr_auto] items-start gap-3 text-[14px] leading-6"
+                >
+                  <Link
+                    href="/notice"
+                    className="truncate text-neutral-700 transition-colors hover:text-neutral-900"
+                    title={notice.title}
+                  >
+                    {notice.title}
+                  </Link>
+                  <span className="shrink-0 text-neutral-600">{notice.date}</span>
+                </div>
+              ))}
+            </div>
+          </section>
 
           {/* SNS */}
-          <div>
-            <h3 className="font-bold text-xs mb-2 text-gray-900">SNS</h3>
-            <div className="flex gap-3">
+          <section>
+            <div className="border-b border-neutral-300 pb-2.5">
+              <h3 className="text-[19px] font-semibold tracking-tight text-neutral-800">
+                {text.snsTitle}
+              </h3>
+            </div>
+
+            <div className="mt-6">
               <a
-                href="#"
-                className="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-500 hover:bg-gray-50 transition-colors"
-                aria-label="Instagram"
+                href="https://www.instagram.com/"
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex min-w-[96px] items-center justify-center rounded-[18px] border border-neutral-300 bg-white px-5 py-4 text-[14px] font-medium text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
               >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <rect width="20" height="20" x="2" y="2" rx="5" ry="5" strokeWidth={1.5} />
-                  <circle cx="12" cy="12" r="4" strokeWidth={1.5} />
-                  <circle cx="18" cy="6" r="1.5" fill="currentColor" />
-                </svg>
-              </a>
-              <a
-                href="#"
-                className="w-8 h-8 flex items-center justify-center rounded border border-gray-300 text-gray-500 hover:bg-gray-50 transition-colors"
-                aria-label="Facebook"
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeWidth={1.5} d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z" />
-                </svg>
+                {text.instagram}
               </a>
             </div>
-          </div>
+          </section>
         </div>
-      </div>
 
-      {/* Middle Section: Navigation (light grey strip) */}
-      <div className="bg-gray-50 border-y border-gray-100">
-        <div className="max-w-6xl mx-auto px-10 py-2">
-          <nav className="flex flex-wrap items-center gap-x-4 gap-y-1 text-[11px] text-gray-600">
-            <Link href="/about" className="text-gray-700 hover:text-gray-900 transition-colors">
-              About Us
-            </Link>
-            <span className="text-gray-300">|</span>
-            <Link href="/products" className="text-gray-700 hover:text-gray-900 transition-colors">
-              Products
-            </Link>
-            <span className="text-gray-300">|</span>
-            <Link href="/brands" className="text-gray-700 hover:text-gray-900 transition-colors">
-              Brands
-            </Link>
-            <span className="text-gray-300">|</span>
-            <Link href="/terms" className="text-gray-700 hover:text-gray-900 transition-colors">
-              이용약관
-            </Link>
-            <span className="text-gray-300">|</span>
-            <Link href="/privacy" className="text-red-500 hover:text-red-600 transition-colors font-medium">
-              개인정보처리방침
-            </Link>
+        {/* Middle Link Row */}
+        <div className="border-t border-b border-neutral-300 py-5">
+          <nav className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[14px] font-medium text-neutral-700">
+            {text.footerLinks.map((item, index) => (
+              <div key={item.label} className="flex items-center gap-5">
+                <Link href={item.href} className="transition-colors hover:text-neutral-900">
+                  {item.label}
+                </Link>
+                {index < text.footerLinks.length - 1 && (
+                  <span className="text-neutral-300">|</span>
+                )}
+              </div>
+            ))}
           </nav>
         </div>
-      </div>
 
-      {/* Bottom Section: Company Info + Logo */}
-      <div className="max-w-6xl mx-auto px-10 py-2.5">
-        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-          <div className="text-[11px] text-gray-600 space-y-0 leading-none">
-            <p className="font-semibold text-gray-900">ABU Co., Ltd. (주)에이뷰</p>
-            <p>서울시 중구 퇴계로 235, A-401</p>
-            <p>대표자: 민대식 | 개인정보보호책임자: 김주한</p>
-            <p className="pt-1.5 text-gray-500">© ABU ALL RIGHTS RESERVED</p>
-          </div>
-          <div className="shrink-0">
-            <Link href="/" className="inline-block">
-              <Image
-                src="/images/Logo_bk.png"
-                alt="ABU BUSINESS HUB"
-                width={140}
-                height={42}
-                className="object-contain"
-              />
-            </Link>
+        {/* Bottom Company Row */}
+        <div className="grid gap-6 py-6 lg:grid-cols-[1fr_auto] lg:items-end">
+          {/* Company Info — 3줄, 좁은 줄간격 */}
+          <section className="space-y-0.5 text-[13px] font-medium text-neutral-700">
+            <p className="leading-tight">
+              {text.companyNameEn} / {text.companyNameKo}
+            </p>
+            <p className="leading-tight">
+              {text.ceoLabel} {text.ceoName} / {text.licenseLabel}
+              {text.licenseValue ? ` ${text.licenseValue}` : ''}
+            </p>
+            <p className="leading-tight text-neutral-600">
+              {text.address} / {text.copyright}
+            </p>
+          </section>
+
+          {/* 회사 로고 — 오른쪽 아래, 샘플과 비슷한 크기 */}
+          <div className="flex justify-start lg:justify-end">
+            <AbuLogo href="/" src="/images/Logo.png" className="h-8 w-24" invert={false} />
           </div>
         </div>
       </div>

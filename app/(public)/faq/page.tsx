@@ -12,16 +12,16 @@ export default async function FaqPage() {
 
   if (error) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="font-serif text-2xl font-bold mb-6">자주 묻는 질문</h1>
-        <p className="text-abu-pink">FAQ를 불러올 수 없습니다. ({error.message})</p>
+      <div className="mx-auto max-w-4xl px-4 py-12">
+        <h1 className="mb-6 text-3xl font-semibold tracking-tight text-neutral-900">자주 묻는 질문</h1>
+        <p className="text-red-600">FAQ를 불러올 수 없습니다. ({error.message})</p>
       </div>
     )
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-4 py-12">
-      <h1 className="font-serif text-2xl md:text-3xl font-bold mb-10">자주 묻는 질문</h1>
+    <div className="mx-auto max-w-4xl px-4 py-12">
+      <h1 className="mb-10 text-4xl font-semibold tracking-tight text-neutral-900">자주 묻는 질문</h1>
       <FaqClient initialFaqs={faqs ?? []} />
     </div>
   )

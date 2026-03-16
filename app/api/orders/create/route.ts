@@ -1,23 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL!
-const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+import { requireAuthenticatedProfile } from '@/lib/request-auth'
 
 export async function POST(request: NextRequest) {
-  const authHeader = request.headers.get('authorization')
-  const token = authHeader?.replace('Bearer ', '')
-  if (!token) {
-    return NextResponse.json({ error: '인증 필요' }, { status: 401 })
-  }
-
-  const supabase = createClient(url, anonKey, {
-    global: { headers: { Authorization: `Bearer ${token}` } },
-  })
-
-  const { data: { user } } = await supabase.auth.getUser(token)
-  if (!user) {
-    return NextResponse.json({ error: '세션 만료' }, { status: 401 })
+  const auth = await requireAuthenticatedProfile(request, ['buyer'])
+  if (!auth.ok) {
+    return auth.response
   }
 
   try {
@@ -34,11 +21,11 @@ export async function POST(request: NextRequest) {
       0
     )
 
-    const { data: order, error } = await supabase
+    const { data: order, error } = await auth.supabase
       .from('orders')
       .insert({
-        user_id: user.id,
-        user_type: user_type ?? 'buyer',
+        user_id: auth.user.id,
+        user_type: auth.profile?.user_type ?? user_type ?? 'buyer',
         order_type: order_type ?? 'po',
         items,
         total_amount: totalAmount,

@@ -1,15 +1,24 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 
+const ADMIN_COOKIE = 'admin_session'
+
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
 
-  // /admin 하위에서 /admin/login 제외하고 세션 체크
-  if (pathname.startsWith('/admin') && !pathname.startsWith('/admin/login')) {
-    const session = request.cookies.get('admin_session')?.value
+  const needsAdminSession =
+    (pathname.startsWith('/admin') && !pathname.startsWith('/admin/login')) ||
+    pathname.startsWith('/api/admin/')
+
+  if (needsAdminSession) {
+    const session = request.cookies.get(ADMIN_COOKIE)?.value
     if (!session) {
       const loginUrl = new URL('/admin/login', request.url)
       loginUrl.searchParams.set('next', pathname)
+      if (pathname.startsWith('/api/admin/')) {
+        return NextResponse.json({ error: '관리자 인증이 필요합니다.' }, { status: 401 })
+      }
+
       return NextResponse.redirect(loginUrl)
     }
   }
@@ -18,5 +27,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/admin/:path*', '/api/admin/:path*'],
 }

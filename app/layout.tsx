@@ -26,7 +26,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko" className={`${serif.variable} ${sans.variable}`}>
-      <body className="antialiased bg-gray-50 text-sm leading-none">{children}</body>
+      <body className="bg-gray-50 text-sm text-neutral-900 antialiased leading-normal">{children}</body>
     </html>
   )
 }

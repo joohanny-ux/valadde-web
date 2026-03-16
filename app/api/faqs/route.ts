@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { revalidatePath } from 'next/cache'
 import { supabase } from '@/lib/supabase'
+import { requireAdminRequest } from '@/lib/request-auth'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
@@ -25,6 +26,11 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
+  const adminError = requireAdminRequest(request)
+  if (adminError) {
+    return adminError
+  }
+
   try {
     const body = await request.json()
     const { error } = await supabase.from('faqs').insert({

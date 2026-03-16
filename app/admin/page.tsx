@@ -2,10 +2,12 @@ import Link from 'next/link'
 import { supabase } from '@/lib/supabase'
 
 export default async function AdminDashboard() {
-  const [{ count: productCount }, { count: brandCount }, { count: categoryCount }] = await Promise.all([
+  const [{ count: productCount }, { count: brandCount }, { count: categoryCount }, { count: noticeCount }, { count: faqCount }] = await Promise.all([
     supabase.from('products').select('*', { count: 'exact', head: true }),
     supabase.from('brands').select('*', { count: 'exact', head: true }),
     supabase.from('categories').select('*', { count: 'exact', head: true }),
+    supabase.from('notices').select('*', { count: 'exact', head: true }),
+    supabase.from('faqs').select('*', { count: 'exact', head: true }),
   ])
 
   let orderCount = 0
@@ -13,39 +15,64 @@ export default async function AdminDashboard() {
   if (!orderRes.error) orderCount = orderRes.count ?? 0
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-6">대시보드</h1>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-        <div className="bg-white p-4 rounded-lg shadow">
-          <p className="text-sm text-gray-500">브랜드 수</p>
-          <p className="text-2xl font-bold">{brandCount ?? 0}</p>
+    <div className="space-y-8">
+      <div>
+        <h1 className="text-3xl font-semibold tracking-tight text-neutral-900">운영 대시보드</h1>
+        <p className="mt-2 text-sm text-neutral-500">
+          상품, 거래, 콘텐츠 운영 상태를 빠르게 확인하고 각 관리 화면으로 이동합니다.
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-400">Brands</p>
+          <p className="mt-3 text-3xl font-semibold text-neutral-900">{brandCount ?? 0}</p>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow">
-          <p className="text-sm text-gray-500">카테고리 수</p>
-          <p className="text-2xl font-bold">{categoryCount ?? 0}</p>
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-400">Categories</p>
+          <p className="mt-3 text-3xl font-semibold text-neutral-900">{categoryCount ?? 0}</p>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow">
-          <p className="text-sm text-gray-500">상품 수</p>
-          <p className="text-2xl font-bold">{productCount ?? 0}</p>
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-400">Products</p>
+          <p className="mt-3 text-3xl font-semibold text-neutral-900">{productCount ?? 0}</p>
         </div>
-        <div className="bg-white p-4 rounded-lg shadow">
-          <p className="text-sm text-gray-500">주문 수</p>
-          <p className="text-2xl font-bold">{orderCount}</p>
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-400">Orders</p>
+          <p className="mt-3 text-3xl font-semibold text-neutral-900">{orderCount}</p>
+        </div>
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-5 shadow-sm">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-neutral-400">Content</p>
+          <p className="mt-3 text-3xl font-semibold text-neutral-900">{(noticeCount ?? 0) + (faqCount ?? 0)}</p>
         </div>
       </div>
-      <div className="flex gap-3">
-        <Link
-          href="/admin/orders"
-          className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          주문 목록 →
-        </Link>
-        <Link
-          href="/admin/products"
-          className="inline-block px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-        >
-          상품 목록 보기 →
-        </Link>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-neutral-900">운영 바로가기</h2>
+          <div className="mt-5 flex flex-wrap gap-3">
+            <Link href="/admin/orders" className="rounded-full bg-neutral-900 px-4 py-2 text-sm text-white hover:bg-neutral-700">
+              주문 관리
+            </Link>
+            <Link href="/admin/products" className="rounded-full border border-neutral-300 px-4 py-2 text-sm hover:bg-neutral-50">
+              상품 목록
+            </Link>
+            <Link href="/admin/notices" className="rounded-full border border-neutral-300 px-4 py-2 text-sm hover:bg-neutral-50">
+              공지사항
+            </Link>
+            <Link href="/admin/faqs" className="rounded-full border border-neutral-300 px-4 py-2 text-sm hover:bg-neutral-50">
+              FAQ
+            </Link>
+          </div>
+        </div>
+
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-neutral-900">보안 상태</h2>
+          <ul className="mt-5 space-y-3 text-sm text-neutral-600">
+            <li>`/admin` 및 `/api/admin/*`는 관리자 세션 검증을 통과해야 접근할 수 있습니다.</li>
+            <li>브랜드, 카테고리, 공지, FAQ, 상품 수정, 업로드 write API는 관리자 검증을 거칩니다.</li>
+            <li>Buyer 주문 생성과 Creator 판매 의사 신청은 역할 검증을 통과해야 제출됩니다.</li>
+          </ul>
+        </div>
       </div>
     </div>
   )

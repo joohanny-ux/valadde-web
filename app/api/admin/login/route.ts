@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
-
-const ADMIN_COOKIE = 'admin_session'
-const COOKIE_MAX_AGE = 60 * 60 * 24 * 7 // 7일
+import { ADMIN_COOKIE, ADMIN_SESSION_MAX_AGE, createAdminSessionValue } from '@/lib/admin-session'
 
 export async function POST(request: NextRequest) {
   const adminPassword = process.env.ADMIN_PASSWORD
@@ -19,11 +17,11 @@ export async function POST(request: NextRequest) {
   }
 
   const cookieStore = await cookies()
-  cookieStore.set(ADMIN_COOKIE, '1', {
+  cookieStore.set(ADMIN_COOKIE, createAdminSessionValue(), {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    maxAge: COOKIE_MAX_AGE,
+    maxAge: ADMIN_SESSION_MAX_AGE,
     path: '/',
   })
 

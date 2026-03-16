@@ -1,12 +1,18 @@
 import { NextRequest, NextResponse } from 'next/server'
 import * as XLSX from 'xlsx'
 import { supabase } from '@/lib/supabase'
+import { requireAdminRequest } from '@/lib/request-auth'
 
 function genProductId(): string {
   return `p_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 9)}`
 }
 
 export async function POST(request: NextRequest) {
+  const adminError = requireAdminRequest(request)
+  if (adminError) {
+    return adminError
+  }
+
   try {
     const formData = await request.formData()
     const file = formData.get('file') as File

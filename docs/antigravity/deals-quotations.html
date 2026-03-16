@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotations | Valadde Creator Area</title>
+    <meta name="description" content="Review quotations and prepare for the next transaction step in the Valadde Creator Area.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body class="workspace-body deals-page-body">
+
+    <!-- ================================================================
+         GLOBAL HEADER
+         ================================================================ -->
+    <header class="header" id="header">
+        <div class="header-container container">
+            <a href="index.html" class="logo">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img">
+            </a>
+
+            <nav class="nav" id="main-nav">
+                <ul class="nav-list">
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="index.html#creators" class="nav-link active fw-600 text-main">For Creators</a></li>
+                    <li><a href="index.html#buyers" class="nav-link">For Buyers</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-text btn-sm">Log In</button>
+                    <button class="btn btn-primary btn-sm">Sign Up</button>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><i class="ri-menu-line"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 62px;">
+
+        <!-- ================================================================
+             CREATOR AREA SUB-NAVIGATION
+             ================================================================ -->
+        <div class="creator-subnav">
+            <div class="container max-w-5xl subnav-container">
+                <div class="subnav-tabs">
+                    <a href="#" class="subnav-tab">My Page</a>
+                    <a href="selected-products.html" class="subnav-tab">Selected Products</a>
+                    <a href="creator-deals.html" class="subnav-tab active">Deals</a>
+                    <a href="#" class="subnav-tab">Payments</a>
+                    <a href="#" class="subnav-tab">Deliveries</a>
+                    <a href="#" class="subnav-tab">Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PAGE CONTENT WRAPPER
+             ================================================================ -->
+        <div class="container max-w-5xl" style="padding-top: 2.5rem; padding-bottom: 6rem;">
+
+            <!-- Page Intro -->
+            <div class="workspace-header" style="margin-bottom: 2rem;">
+                <h1 class="deals-page-title">Deals</h1>
+                <p class="deals-page-subtitle">Review quotations and prepare for the next transaction step.</p>
+            </div>
+
+            <!-- ================================================================
+                 DEALS INTERNAL TABS (Stage Navigation)
+                 ================================================================ -->
+            <div class="deals-stage-tabs-wrap">
+                <div class="deals-stage-tabs" id="deals-stage-tabs">
+                    <a href="creator-deals.html" class="stage-tab">Active Deals</a>
+                    <button class="stage-tab active" data-stage="quotations">Quotations</button>
+                    <button class="stage-tab" data-stage="purchase-orders">Purchase Orders</button>
+                    <button class="stage-tab" data-stage="invoices">Invoices</button>
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 SEARCH / SORT ROW
+                 ================================================================ -->
+            <div class="qt-filter-bar">
+                <div class="deals-search-wrap">
+                    <i class="ri-search-line"></i>
+                    <input type="text" class="deals-search-input" id="qt-search" placeholder="Search quotation number…">
+                </div>
+                <select class="deals-sort-select" id="qt-sort">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="brand">By Brand</option>
+                </select>
+            </div>
+
+            <!-- ================================================================
+                 QUOTATIONS DOCUMENT LIST
+                 ================================================================ -->
+
+            <!-- Column header row -->
+            <div class="qt-col-header">
+                <span class="qt-col qt-col--id">Quotation</span>
+                <span class="qt-col qt-col--date">Date</span>
+                <span class="qt-col qt-col--context">Deal / Product</span>
+                <span class="qt-col qt-col--status">Status</span>
+                <span class="qt-col qt-col--action">Action</span>
+            </div>
+
+            <div class="qt-list" id="qt-list">
+
+                <!-- ── QT-001: Accepted ── -->
+                <article class="qt-row">
+                    <div class="qt-cell qt-cell--id">
+                        <span class="qt-number">QT-2026-0041</span>
+                        <span class="qt-brand-pill">AURA BEAUTY</span>
+                    </div>
+                    <div class="qt-cell qt-cell--date">
+                        <span class="qt-date">Mar 12, 2026</span>
+                    </div>
+                    <div class="qt-cell qt-cell--context">
+                        <span class="qt-product-name">Luminous Silk Foundation – 30ml</span>
+                        <span class="qt-deal-ref">Deal #D-0041 · Instagram Live Campaign</span>
+                    </div>
+                    <div class="qt-cell qt-cell--status">
+                        <span class="qt-status-badge qt-status--accepted">Accepted</span>
+                    </div>
+                    <div class="qt-cell qt-cell--action">
+                        <button class="qt-action-primary"><i class="ri-download-2-line"></i> Download</button>
+                    </div>
+                </article>
+
+                <!-- ── QT-002: Pending Review ── -->
+                <article class="qt-row qt-row--pending">
+                    <div class="qt-cell qt-cell--id">
+                        <span class="qt-number">QT-2026-0038</span>
+                        <span class="qt-brand-pill">LUMINA</span>
+                    </div>
+                    <div class="qt-cell qt-cell--date">
+                        <span class="qt-date">Mar 10, 2026</span>
+                    </div>
+                    <div class="qt-cell qt-cell--context">
+                        <span class="qt-product-name">Deep Hydration Serum Set</span>
+                        <span class="qt-deal-ref">Deal #D-0038 · TikTok Shop Campaign</span>
+                    </div>
+                    <div class="qt-cell qt-cell--status">
+                        <span class="qt-status-badge qt-status--pending">Pending Review</span>
+                    </div>
+                    <div class="qt-cell qt-cell--action">
+                        <button class="qt-action-primary qt-action-primary--cta"><i class="ri-file-text-line"></i> Review Quote</button>
+                    </div>
+                </article>
+
+                <!-- ── QT-003: Accepted ── -->
+                <article class="qt-row">
+                    <div class="qt-cell qt-cell--id">
+                        <span class="qt-number">QT-2026-0035</span>
+                        <span class="qt-brand-pill">VELVET KISS</span>
+                    </div>
+                    <div class="qt-cell qt-cell--date">
+                        <span class="qt-date">Mar 7, 2026</span>
+                    </div>
+                    <div class="qt-cell qt-cell--context">
+                        <span class="qt-product-name">Signature Matte Lip Kit – 5 Colors</span>
+                        <span class="qt-deal-ref">Deal #D-0035 · YouTube Review Campaign</span>
+                    </div>
+                    <div class="qt-cell qt-cell--status">
+                        <span class="qt-status-badge qt-status--accepted">Accepted</span>
+                    </div>
+                    <div class="qt-cell qt-cell--action">
+                        <button class="qt-action-primary"><i class="ri-download-2-line"></i> Download</button>
+                    </div>
+                </article>
+
+                <!-- ── QT-004: Expired ── -->
+                <article class="qt-row qt-row--muted">
+                    <div class="qt-cell qt-cell--id">
+                        <span class="qt-number">QT-2026-0029</span>
+                        <span class="qt-brand-pill">NATURE LAB</span>
+                    </div>
+                    <div class="qt-cell qt-cell--date">
+                        <span class="qt-date">Feb 28, 2026</span>
+                    </div>
+                    <div class="qt-cell qt-cell--context">
+                        <span class="qt-product-name">Gentle Botanical Cleanser</span>
+                        <span class="qt-deal-ref">Deal #D-0029 · Group Buy Campaign</span>
+                    </div>
+                    <div class="qt-cell qt-cell--status">
+                        <span class="qt-status-badge qt-status--expired">Expired</span>
+                    </div>
+                    <div class="qt-cell qt-cell--action">
+                        <button class="qt-action-secondary">View Details</button>
+                    </div>
+                </article>
+
+                <!-- ── QT-005: Pending Review ── -->
+                <article class="qt-row qt-row--pending">
+                    <div class="qt-cell qt-cell--id">
+                        <span class="qt-number">QT-2026-0027</span>
+                        <span class="qt-brand-pill">MARINE</span>
+                    </div>
+                    <div class="qt-cell qt-cell--date">
+                        <span class="qt-date">Feb 25, 2026</span>
+                    </div>
+                    <div class="qt-cell qt-cell--context">
+                        <span class="qt-product-name">Deep Sea Exfoliating Scrub</span>
+                        <span class="qt-deal-ref">Deal #D-0027 · Instagram Live</span>
+                    </div>
+                    <div class="qt-cell qt-cell--status">
+                        <span class="qt-status-badge qt-status--pending">Pending Review</span>
+                    </div>
+                    <div class="qt-cell qt-cell--action">
+                        <button class="qt-action-primary qt-action-primary--cta"><i class="ri-file-text-line"></i> Review Quote</button>
+                    </div>
+                </article>
+
+                <!-- ── QT-006: Accepted ── -->
+                <article class="qt-row">
+                    <div class="qt-cell qt-cell--id">
+                        <span class="qt-number">QT-2026-0021</span>
+                        <span class="qt-brand-pill">PETAL</span>
+                    </div>
+                    <div class="qt-cell qt-cell--date">
+                        <span class="qt-date">Feb 19, 2026</span>
+                    </div>
+                    <div class="qt-cell qt-cell--context">
+                        <span class="qt-product-name">Rose Water Calming Toner</span>
+                        <span class="qt-deal-ref">Deal #D-0021 · Community Group Buy</span>
+                    </div>
+                    <div class="qt-cell qt-cell--status">
+                        <span class="qt-status-badge qt-status--accepted">Accepted</span>
+                    </div>
+                    <div class="qt-cell qt-cell--action">
+                        <button class="qt-action-primary"><i class="ri-download-2-line"></i> Download</button>
+                    </div>
+                </article>
+
+            </div><!-- /qt-list -->
+
+            <!-- Load More -->
+            <div class="deals-load-more">
+                <button class="btn btn-outline bg-white deals-load-more-btn">
+                    Load More
+                </button>
+            </div>
+
+        </div><!-- /container -->
+    </main>
+
+    <!-- ================================================================
+         MINIMAL FOOTER
+         ================================================================ -->
+    <footer class="footer-minimal section" style="background: white; padding-bottom: 4rem; padding-top: 2rem;">
+        <div class="container footer-bottom-bar flex-between" style="border-top: 1px solid var(--c-border); padding-top: 2rem;">
+            <div class="footer-brand">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img" style="height: 22px;">
+            </div>
+            <div class="footer-copyright" style="font-size: 0.85rem; color: var(--c-text-muted);">
+                &copy; 2026 Valadde Inc.
+            </div>
+            <div class="footer-legal-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // ── Stage Tab Switching (non-link tabs) ──
+        const stageTabs = document.querySelectorAll('.stage-tab[data-stage]');
+        stageTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.stage-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // ── Live Search by quotation number / product / brand ──
+        const searchInput = document.getElementById('qt-search');
+        const qtRows = document.querySelectorAll('.qt-row');
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            qtRows.forEach(row => {
+                row.style.display = row.textContent.toLowerCase().includes(query) ? '' : 'none';
+            });
+        });
+
+        // ── Sort ──
+        const sortSelect = document.getElementById('qt-sort');
+        const qtList = document.getElementById('qt-list');
+        sortSelect.addEventListener('change', () => {
+            const rows = Array.from(qtList.querySelectorAll('.qt-row'));
+            rows.sort((a, b) => {
+                const getDate = r => new Date(r.querySelector('.qt-date').textContent);
+                const getBrand = r => r.querySelector('.qt-brand-pill').textContent;
+                if (sortSelect.value === 'newest') return getDate(b) - getDate(a);
+                if (sortSelect.value === 'oldest') return getDate(a) - getDate(b);
+                if (sortSelect.value === 'brand') return getBrand(a).localeCompare(getBrand(b));
+                return 0;
+            });
+            rows.forEach(r => qtList.appendChild(r));
+        });
+    </script>
+</body>
+
+</html>

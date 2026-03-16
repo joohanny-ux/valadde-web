@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payments | Valadde Creator Area</title>
+    <meta name="description" content="Review payment requests, upload proof, and confirm payment submission in the Valadde Creator Area.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body class="workspace-body deals-page-body">
+
+    <!-- ================================================================
+         GLOBAL HEADER
+         ================================================================ -->
+    <header class="header" id="header">
+        <div class="header-container container">
+            <a href="index.html" class="logo">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img">
+            </a>
+            <nav class="nav" id="main-nav">
+                <ul class="nav-list">
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="index.html#creators" class="nav-link active fw-600 text-main">For Creators</a></li>
+                    <li><a href="index.html#buyers" class="nav-link">For Buyers</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-text btn-sm">Log In</button>
+                    <button class="btn btn-primary btn-sm">Sign Up</button>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><i class="ri-menu-line"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 62px;">
+
+        <!-- ================================================================
+             CREATOR AREA SUB-NAVIGATION
+             ================================================================ -->
+        <div class="creator-subnav">
+            <div class="container max-w-5xl subnav-container">
+                <div class="subnav-tabs">
+                    <a href="#" class="subnav-tab">My Page</a>
+                    <a href="selected-products.html" class="subnav-tab">Selected Products</a>
+                    <a href="creator-deals.html" class="subnav-tab">Deals</a>
+                    <a href="creator-payments.html" class="subnav-tab active">Payments</a>
+                    <a href="#" class="subnav-tab">Deliveries</a>
+                    <a href="#" class="subnav-tab">Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PAGE CONTENT WRAPPER
+             ================================================================ -->
+        <div class="container max-w-5xl" style="padding-top: 2.5rem; padding-bottom: 6rem;">
+
+            <!-- Page Intro -->
+            <div class="workspace-header" style="margin-bottom: 2rem;">
+                <h1 class="deals-page-title">Payments</h1>
+                <p class="deals-page-subtitle">Review payment requests, upload proof, and confirm payment submission.</p>
+            </div>
+
+            <!-- ================================================================
+                 FILTER / SEARCH / SORT ROW
+                 ================================================================ -->
+            <div class="pmt-filter-bar">
+                <!-- Status filter pills -->
+                <div class="pmt-status-filters">
+                    <button class="status-filter-pill active" data-filter="all">All</button>
+                    <button class="status-filter-pill" data-filter="action">Action Needed</button>
+                    <button class="status-filter-pill" data-filter="submitted">Submitted</button>
+                    <button class="status-filter-pill" data-filter="confirmed">Confirmed</button>
+                    <button class="status-filter-pill" data-filter="cancelled">Cancelled</button>
+                </div>
+                <!-- Search + sort -->
+                <div class="pmt-filter-right">
+                    <div class="deals-search-wrap">
+                        <i class="ri-search-line"></i>
+                        <input type="text" class="deals-search-input" id="pmt-search" placeholder="Search invoice number…">
+                    </div>
+                    <select class="deals-sort-select" id="pmt-sort">
+                        <option value="newest">Newest First</option>
+                        <option value="oldest">Oldest First</option>
+                        <option value="brand">By Brand</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 SUMMARY BANNER — action count
+                 ================================================================ -->
+            <div class="pmt-summary-banner">
+                <div class="pmt-summary-left">
+                    <i class="ri-secure-payment-line"></i>
+                    <span>2 invoices are ready for payment — upload your receipt to proceed.</span>
+                </div>
+                <a href="#" class="pmt-summary-link">What to upload <i class="ri-question-line"></i></a>
+            </div>
+
+            <!-- Column header row -->
+            <div class="pmt-col-header">
+                <span class="pmt-col pmt-col--id">Invoice</span>
+                <span class="pmt-col pmt-col--date">Date</span>
+                <span class="pmt-col pmt-col--context">Deal / Product</span>
+                <span class="pmt-col pmt-col--right">Status &amp; Action</span>
+            </div>
+
+            <!-- ================================================================
+                 PAYMENTS LIST
+                 ================================================================ -->
+            <div class="pmt-list" id="pmt-list">
+
+                <!-- ── PMT-001: Ready for Payment → Upload Receipt ── -->
+                <article class="pmt-row pmt-row--upload" data-status="action">
+                    <div class="pmt-cell pmt-cell--id">
+                        <span class="pmt-number">INV-2026-0041</span>
+                        <span class="pmt-brand-pill">AURA BEAUTY</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--date">
+                        <span class="pmt-date">Mar 15, 2026</span>
+                        <span class="pmt-ref">PO-2026-0041</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--context">
+                        <span class="pmt-product-name">Luminous Silk Foundation – 30ml</span>
+                        <span class="pmt-deal-ref">Deal #D-0041 · Instagram Live Campaign</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--right">
+                        <span class="pmt-status-badge pmt-status--ready">Ready for Payment</span>
+                        <div class="pmt-actions-wrap">
+                            <button class="pmt-action-btn pmt-action-btn--upload" data-modal="upload" data-inv="INV-2026-0041" data-brand="AURA BEAUTY" data-product="Luminous Silk Foundation – 30ml">
+                                <i class="ri-upload-2-line"></i> Upload Receipt
+                            </button>
+                            <button class="pmt-action-ghost">
+                                <i class="ri-download-2-line"></i> Download Invoice
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ── PMT-002: Ready for Payment → Upload Receipt ── -->
+                <article class="pmt-row pmt-row--upload" data-status="action">
+                    <div class="pmt-cell pmt-cell--id">
+                        <span class="pmt-number">INV-2026-0038</span>
+                        <span class="pmt-brand-pill">LUMINA</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--date">
+                        <span class="pmt-date">Mar 13, 2026</span>
+                        <span class="pmt-ref">PO-2026-0038</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--context">
+                        <span class="pmt-product-name">Deep Hydration Serum Set</span>
+                        <span class="pmt-deal-ref">Deal #D-0038 · TikTok Shop Campaign</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--right">
+                        <span class="pmt-status-badge pmt-status--ready">Ready for Payment</span>
+                        <div class="pmt-actions-wrap">
+                            <button class="pmt-action-btn pmt-action-btn--upload" data-modal="upload" data-inv="INV-2026-0038" data-brand="LUMINA" data-product="Deep Hydration Serum Set">
+                                <i class="ri-upload-2-line"></i> Upload Receipt
+                            </button>
+                            <button class="pmt-action-ghost">
+                                <i class="ri-download-2-line"></i> Download Invoice
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ── PMT-003: Receipt Uploaded → Confirm Payment ── -->
+                <article class="pmt-row pmt-row--confirm" data-status="action">
+                    <div class="pmt-cell pmt-cell--id">
+                        <span class="pmt-number">INV-2026-0035</span>
+                        <span class="pmt-brand-pill">VELVET KISS</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--date">
+                        <span class="pmt-date">Mar 10, 2026</span>
+                        <span class="pmt-ref">PO-2026-0035</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--context">
+                        <span class="pmt-product-name">Signature Matte Lip Kit – 5 Colors</span>
+                        <span class="pmt-deal-ref">Deal #D-0035 · YouTube Review Campaign</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--right">
+                        <span class="pmt-status-badge pmt-status--uploaded">Receipt Uploaded</span>
+                        <div class="pmt-actions-wrap">
+                            <button class="pmt-action-btn pmt-action-btn--confirm" data-modal="confirm" data-inv="INV-2026-0035" data-brand="VELVET KISS" data-product="Signature Matte Lip Kit – 5 Colors" data-date="Mar 10, 2026">
+                                <i class="ri-checkbox-circle-line"></i> Confirm Payment
+                            </button>
+                            <button class="pmt-action-ghost">
+                                <i class="ri-eye-line"></i> View Submitted
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ── PMT-004: Under Review ── -->
+                <article class="pmt-row" data-status="submitted">
+                    <div class="pmt-cell pmt-cell--id">
+                        <span class="pmt-number">INV-2026-0029</span>
+                        <span class="pmt-brand-pill">MARINE</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--date">
+                        <span class="pmt-date">Mar 6, 2026</span>
+                        <span class="pmt-ref">PO-2026-0029</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--context">
+                        <span class="pmt-product-name">Deep Sea Exfoliating Scrub</span>
+                        <span class="pmt-deal-ref">Deal #D-0029 · Instagram Live</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--right">
+                        <span class="pmt-status-badge pmt-status--review">Under Review</span>
+                        <div class="pmt-actions-wrap">
+                            <button class="pmt-action-ghost">
+                                <i class="ri-eye-line"></i> View Submitted
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ── PMT-005: Confirmed ── -->
+                <article class="pmt-row" data-status="confirmed">
+                    <div class="pmt-cell pmt-cell--id">
+                        <span class="pmt-number">INV-2026-0021</span>
+                        <span class="pmt-brand-pill">PETAL</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--date">
+                        <span class="pmt-date">Feb 25, 2026</span>
+                        <span class="pmt-ref">PO-2026-0021</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--context">
+                        <span class="pmt-product-name">Rose Water Calming Toner</span>
+                        <span class="pmt-deal-ref">Deal #D-0021 · Community Group Buy</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--right">
+                        <span class="pmt-status-badge pmt-status--confirmed">Confirmed</span>
+                        <div class="pmt-actions-wrap">
+                            <button class="pmt-action-ghost">
+                                <i class="ri-download-2-line"></i> Download Invoice
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ── PMT-006: Confirmed ── -->
+                <article class="pmt-row" data-status="confirmed">
+                    <div class="pmt-cell pmt-cell--id">
+                        <span class="pmt-number">INV-2026-0018</span>
+                        <span class="pmt-brand-pill">GLOW CO.</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--date">
+                        <span class="pmt-date">Feb 20, 2026</span>
+                        <span class="pmt-ref">PO-2026-0018</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--context">
+                        <span class="pmt-product-name">Rose Gold Highlighter Palette</span>
+                        <span class="pmt-deal-ref">Deal #D-0018 · YouTube Deal Completed</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--right">
+                        <span class="pmt-status-badge pmt-status--confirmed">Confirmed</span>
+                        <div class="pmt-actions-wrap">
+                            <button class="pmt-action-ghost">
+                                <i class="ri-download-2-line"></i> Download Invoice
+                            </button>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- ── PMT-007: Cancelled ── -->
+                <article class="pmt-row pmt-row--muted" data-status="cancelled">
+                    <div class="pmt-cell pmt-cell--id">
+                        <span class="pmt-number">INV-2026-0019</span>
+                        <span class="pmt-brand-pill">NATURE LAB</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--date">
+                        <span class="pmt-date">Feb 22, 2026</span>
+                        <span class="pmt-ref">PO-2026-0019</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--context">
+                        <span class="pmt-product-name">Gentle Botanical Cleanser</span>
+                        <span class="pmt-deal-ref">Deal #D-0019 · Group Buy Campaign</span>
+                    </div>
+                    <div class="pmt-cell pmt-cell--right">
+                        <span class="pmt-status-badge pmt-status--cancelled">Cancelled</span>
+                        <div class="pmt-actions-wrap">
+                            <button class="pmt-action-ghost">View Record</button>
+                        </div>
+                    </div>
+                </article>
+
+            </div><!-- /pmt-list -->
+
+            <!-- Load More -->
+            <div class="deals-load-more">
+                <button class="btn btn-outline bg-white deals-load-more-btn">Load More</button>
+            </div>
+
+        </div><!-- /container -->
+    </main>
+
+    <!-- ================================================================
+         PAYMENT CONFIRMATION POPUP (unified two-step)
+         ================================================================ -->
+    <div class="pc-overlay" id="pc-overlay" aria-hidden="true">
+        <div class="pc-popup" role="dialog" aria-modal="true" aria-labelledby="pc-title">
+
+            <!-- ── Popup Header ── -->
+            <div class="pc-header">
+                <div class="pc-header-left">
+                    <p class="pc-eyebrow">Payment Information</p>
+                    <!-- Step indicator -->
+                    <div class="pc-steps" id="pc-steps">
+                        <span class="pc-step-dot pc-step-dot--active" id="pc-dot-1"></span>
+                        <span class="pc-step-line"></span>
+                        <span class="pc-step-dot" id="pc-dot-2"></span>
+                        <span class="pc-step-label" id="pc-step-label">Step 1 of 2 &mdash; Add receipt</span>
+                    </div>
+                </div>
+                <button class="pc-close" id="pc-close" aria-label="Close popup">
+                    <i class="ri-close-line"></i>
+                </button>
+            </div>
+
+            <!-- ── Invoice Identity Card ── -->
+            <div class="pc-inv-card">
+                <div class="pc-inv-card-left">
+                    <span class="pc-inv-brand" id="pc-inv-brand">AURA BEAUTY</span>
+                    <span class="pc-inv-number" id="pc-inv-number">INV-2026-0041</span>
+                </div>
+                <div class="pc-inv-card-right">
+                    <span class="pc-inv-product" id="pc-inv-product">Luminous Silk Foundation – 30ml</span>
+                    <span class="pc-inv-meta" id="pc-inv-meta">Mar 15, 2026 &middot; PO-2026-0041</span>
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 STEP 1 — Upload receipt
+                 ================================================================ -->
+            <div class="pc-step" id="pc-step-1">
+                <div class="pc-body">
+
+                    <!-- Upload zone -->
+                    <div class="pc-upload-zone" id="pc-upload-zone">
+                        <div class="pc-upload-zone-inner" id="pc-upload-inner">
+                            <div class="pc-upload-icon-wrap">
+                                <i class="ri-upload-cloud-2-line"></i>
+                            </div>
+                            <p class="pc-upload-label">Drag &amp; drop your receipt here</p>
+                            <p class="pc-upload-sub">JPG, PNG or PDF &mdash; max 10 MB</p>
+                            <label class="pc-browse-btn" for="pc-file-input">Browse Files</label>
+                            <input type="file" id="pc-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display:none;">
+                        </div>
+                    </div>
+
+                    <!-- Payment reference (optional) -->
+                    <div class="pc-field-group">
+                        <label class="pc-field-label" for="pc-ref-input">
+                            Payment reference
+                            <span class="pc-field-optional">(optional)</span>
+                        </label>
+                        <input
+                            type="text"
+                            id="pc-ref-input"
+                            class="pc-field-input"
+                            placeholder="e.g. bank transfer ID, cheque number…"
+                            autocomplete="off"
+                        >
+                    </div>
+
+                </div>
+                <div class="pc-footer">
+                    <button class="pc-btn-ghost" id="pc-download-inv">
+                        <i class="ri-download-2-line"></i> Download Invoice
+                    </button>
+                    <div class="pc-footer-right">
+                        <button class="pc-btn-back" id="pc-step1-cancel">Cancel</button>
+                        <button class="pc-btn-next" id="pc-step1-next" disabled>
+                            Next <i class="ri-arrow-right-line"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 STEP 2 — Review & Confirm
+                 ================================================================ -->
+            <div class="pc-step pc-step--hidden" id="pc-step-2">
+                <div class="pc-body">
+
+                    <!-- Uploaded file row -->
+                    <div class="pc-file-row" id="pc-file-row">
+                        <div class="pc-file-thumb">
+                            <i class="ri-file-text-line"></i>
+                        </div>
+                        <div class="pc-file-info">
+                            <span class="pc-file-name" id="pc-file-name">receipt.pdf</span>
+                            <span class="pc-file-meta" id="pc-file-meta">PDF &middot; ready to submit</span>
+                        </div>
+                        <button class="pc-btn-ghost pc-file-change" id="pc-change-file" style="margin-left: auto;">
+                            <i class="ri-pencil-line"></i> Change
+                        </button>
+                    </div>
+
+                    <!-- Detail summary -->
+                    <div class="pc-detail-list">
+                        <div class="pc-detail-row">
+                            <span class="pc-detail-label">Invoice</span>
+                            <span class="pc-detail-value" id="pc-d-inv">INV-2026-0041</span>
+                        </div>
+                        <div class="pc-detail-row">
+                            <span class="pc-detail-label">Brand</span>
+                            <span class="pc-detail-value" id="pc-d-brand">AURA BEAUTY</span>
+                        </div>
+                        <div class="pc-detail-row">
+                            <span class="pc-detail-label">Invoice date</span>
+                            <span class="pc-detail-value" id="pc-d-date">Mar 15, 2026</span>
+                        </div>
+                        <div class="pc-detail-row">
+                            <span class="pc-detail-label">Status after</span>
+                            <span class="pc-detail-value">
+                                <span class="pmt-status-badge pmt-status--review" style="font-size:0.7rem;padding:0.15rem 0.55rem;">Under Review</span>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Consent note -->
+                    <div class="pc-consent">
+                        <i class="ri-shield-check-line"></i>
+                        <p>By confirming, you confirm this receipt reflects a real payment made for this invoice.</p>
+                    </div>
+
+                </div>
+                <div class="pc-footer">
+                    <button class="pc-btn-back" id="pc-step2-back">
+                        <i class="ri-arrow-left-line"></i> Back
+                    </button>
+                    <button class="pc-btn-confirm" id="pc-confirm-submit">
+                        <i class="ri-checkbox-circle-line"></i> Confirm &amp; Submit
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================================================================
+         MINIMAL FOOTER
+         ================================================================ -->
+    <footer class="footer-minimal section" style="background: white; padding-bottom: 4rem; padding-top: 2rem;">
+        <div class="container footer-bottom-bar flex-between" style="border-top: 1px solid var(--c-border); padding-top: 2rem;">
+            <div class="footer-brand">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img" style="height: 22px;">
+            </div>
+            <div class="footer-copyright" style="font-size: 0.85rem; color: var(--c-text-muted);">
+                &copy; 2026 Valadde Inc.
+            </div>
+            <div class="footer-legal-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+    // ==================================================================
+    // LIST CONTROLS — Filter pills / Live search / Sort
+    // ==================================================================
+
+    const filterPills = document.querySelectorAll('.status-filter-pill[data-filter]');
+    const pmtRows     = document.querySelectorAll('.pmt-row');
+
+    filterPills.forEach(pill => {
+        pill.addEventListener('click', () => {
+            filterPills.forEach(p => p.classList.remove('active'));
+            pill.classList.add('active');
+            const filter = pill.dataset.filter;
+            pmtRows.forEach(row => {
+                row.style.display = (filter === 'all' || row.dataset.status === filter) ? '' : 'none';
+            });
+        });
+    });
+
+    const pmtSearch = document.getElementById('pmt-search');
+    pmtSearch.addEventListener('input', () => {
+        const q = pmtSearch.value.toLowerCase();
+        pmtRows.forEach(row => {
+            row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+        });
+    });
+
+    const pmtSort = document.getElementById('pmt-sort');
+    const pmtList = document.getElementById('pmt-list');
+    pmtSort.addEventListener('change', () => {
+        const rows = Array.from(pmtList.querySelectorAll('.pmt-row'));
+        rows.sort((a, b) => {
+            const getDate  = r => new Date(r.querySelector('.pmt-date').textContent);
+            const getBrand = r => r.querySelector('.pmt-brand-pill').textContent;
+            if (pmtSort.value === 'newest') return getDate(b)  - getDate(a);
+            if (pmtSort.value === 'oldest') return getDate(a)  - getDate(b);
+            if (pmtSort.value === 'brand')  return getBrand(a).localeCompare(getBrand(b));
+            return 0;
+        });
+        rows.forEach(r => pmtList.appendChild(r));
+    });
+
+    // ==================================================================
+    // PAYMENT CONFIRMATION POPUP
+    // ==================================================================
+
+    const pcOverlay   = document.getElementById('pc-overlay');
+    const pcStep1     = document.getElementById('pc-step-1');
+    const pcStep2     = document.getElementById('pc-step-2');
+    const pcDot1      = document.getElementById('pc-dot-1');
+    const pcDot2      = document.getElementById('pc-dot-2');
+    const pcStepLabel = document.getElementById('pc-step-label');
+    const pcUploadZone = document.getElementById('pc-upload-zone');
+    const pcUploadInner = document.getElementById('pc-upload-inner');
+    const pcFileInput  = document.getElementById('pc-file-input');
+    const pcNextBtn    = document.getElementById('pc-step1-next');
+    const pcConfirmBtn = document.getElementById('pc-confirm-submit');
+
+    let currentFile = null;
+    let currentData = {};
+
+    // ── Open / Close ──────────────────────────────────────────────────
+
+    function openPaymentConfirm(data, startStep) {
+        currentData = data;
+        currentFile = null;
+
+        // Populate invoice identity card
+        document.getElementById('pc-inv-brand').textContent   = data.brand;
+        document.getElementById('pc-inv-number').textContent  = data.inv;
+        document.getElementById('pc-inv-product').textContent = data.product;
+        document.getElementById('pc-inv-meta').textContent    = data.date + ' · ' + data.po;
+
+        // Populate detail rows
+        document.getElementById('pc-d-inv').textContent   = data.inv;
+        document.getElementById('pc-d-brand').textContent = data.brand;
+        document.getElementById('pc-d-date').textContent  = data.date;
+
+        if (startStep === 2) {
+            // Pre-fill receipt row with placeholder (already uploaded)
+            document.getElementById('pc-file-name').textContent = 'receipt_submitted.pdf';
+            document.getElementById('pc-file-meta').textContent = 'PDF · previously uploaded';
+            showStep(2);
+        } else {
+            resetUploadZone();
+            showStep(1);
+        }
+
+        pcOverlay.classList.add('is-open');
+        pcOverlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePopup() {
+        pcOverlay.classList.remove('is-open');
+        pcOverlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+        // Reset confirm button label
+        pcConfirmBtn.innerHTML = '<i class="ri-checkbox-circle-line"></i> Confirm &amp; Submit';
+        pcConfirmBtn.disabled = false;
+    }
+
+    // ── Step navigation ───────────────────────────────────────────────
+
+    function showStep(n) {
+        if (n === 1) {
+            pcStep1.classList.remove('pc-step--hidden');
+            pcStep2.classList.add('pc-step--hidden');
+            pcDot1.classList.add('pc-step-dot--active');
+            pcDot2.classList.remove('pc-step-dot--active');
+            pcStepLabel.innerHTML = 'Step 1 of 2 &mdash; Add receipt';
+        } else {
+            pcStep1.classList.add('pc-step--hidden');
+            pcStep2.classList.remove('pc-step--hidden');
+            pcDot1.classList.remove('pc-step-dot--active');
+            pcDot2.classList.add('pc-step-dot--active');
+            pcStepLabel.innerHTML = 'Step 2 of 2 &mdash; Review &amp; confirm';
+        }
+    }
+
+    // ── Upload zone ───────────────────────────────────────────────────
+
+    function resetUploadZone() {
+        pcUploadZone.classList.remove('is-dragging', 'is-ready');
+        pcNextBtn.disabled = true;
+        pcUploadInner.innerHTML = `
+            <div class="pc-upload-icon-wrap"><i class="ri-upload-cloud-2-line"></i></div>
+            <p class="pc-upload-label">Drag &amp; drop your receipt here</p>
+            <p class="pc-upload-sub">JPG, PNG or PDF &mdash; max 10 MB</p>
+            <label class="pc-browse-btn" for="pc-file-input">Browse Files</label>
+            <input type="file" id="pc-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display:none;">
+        `;
+        // Re-bind the new file input
+        document.getElementById('pc-file-input').addEventListener('change', onFileInputChange);
+    }
+
+    function setFileReady(file) {
+        currentFile = file;
+        const sizeKB = (file.size / 1024).toFixed(0);
+        pcUploadZone.classList.remove('is-dragging');
+        pcUploadZone.classList.add('is-ready');
+        pcUploadInner.innerHTML = `
+            <div class="pc-upload-icon-wrap pc-upload-icon-wrap--ready">
+                <i class="ri-file-check-2-line"></i>
+            </div>
+            <p class="pc-upload-label pc-upload-label--ready">${file.name}</p>
+            <p class="pc-upload-sub">${sizeKB} KB &mdash; ready to submit</p>
+            <label class="pc-browse-btn pc-browse-btn--ghost" for="pc-file-input">Change file</label>
+            <input type="file" id="pc-file-input" accept=".jpg,.jpeg,.png,.pdf" style="display:none;">
+        `;
+        document.getElementById('pc-file-input').addEventListener('change', onFileInputChange);
+
+        // Populate step 2 file row
+        document.getElementById('pc-file-name').textContent = file.name;
+        document.getElementById('pc-file-meta').textContent = sizeKB + ' KB · ready to submit';
+
+        pcNextBtn.disabled = false;
+    }
+
+    function onFileInputChange(e) {
+        const f = e.target.files[0];
+        if (f) setFileReady(f);
+    }
+
+    // Drag events on upload zone
+    pcUploadZone.addEventListener('dragover', e => {
+        e.preventDefault();
+        if (!pcUploadZone.classList.contains('is-ready')) {
+            pcUploadZone.classList.add('is-dragging');
+        }
+    });
+    pcUploadZone.addEventListener('dragleave', () => pcUploadZone.classList.remove('is-dragging'));
+    pcUploadZone.addEventListener('drop', e => {
+        e.preventDefault();
+        const f = e.dataTransfer.files[0];
+        if (f) setFileReady(f);
+    });
+    // Initial file input binding
+    pcFileInput.addEventListener('change', onFileInputChange);
+
+    // ── Button wiring ─────────────────────────────────────────────────
+
+    document.getElementById('pc-close').addEventListener('click', closePopup);
+    document.getElementById('pc-step1-cancel').addEventListener('click', closePopup);
+
+    pcNextBtn.addEventListener('click', () => {
+        if (currentFile) showStep(2);
+    });
+
+    document.getElementById('pc-step2-back').addEventListener('click', () => showStep(1));
+
+    document.getElementById('pc-change-file').addEventListener('click', () => showStep(1));
+
+    pcConfirmBtn.addEventListener('click', () => {
+        pcConfirmBtn.disabled = true;
+        pcConfirmBtn.innerHTML = '<i class="ri-loader-4-line"></i> Submitting…';
+        setTimeout(() => {
+            closePopup();
+        }, 1500);
+    });
+
+    // Close on backdrop click
+    pcOverlay.addEventListener('click', e => {
+        if (e.target === pcOverlay) closePopup();
+    });
+
+    // Close on Escape
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closePopup();
+    });
+
+    // ── Row button triggers ───────────────────────────────────────────
+
+    document.querySelectorAll('[data-modal="upload"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const row = btn.closest('.pmt-row');
+            openPaymentConfirm({
+                inv:     btn.dataset.inv,
+                brand:   btn.dataset.brand,
+                product: btn.dataset.product,
+                date:    row.querySelector('.pmt-date').textContent,
+                po:      row.querySelector('.pmt-ref').textContent
+            }, 1);
+        });
+    });
+
+    document.querySelectorAll('[data-modal="confirm"]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const row = btn.closest('.pmt-row');
+            openPaymentConfirm({
+                inv:     btn.dataset.inv,
+                brand:   btn.dataset.brand,
+                product: btn.dataset.product,
+                date:    btn.dataset.date || row.querySelector('.pmt-date').textContent,
+                po:      row.querySelector('.pmt-ref').textContent
+            }, 2);
+        });
+    });
+
+    </script>
+</body>
+
+</html>

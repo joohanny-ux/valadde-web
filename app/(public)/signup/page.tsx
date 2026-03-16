@@ -35,15 +35,17 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="max-w-sm mx-auto py-20 px-4">
-      <h1 className="font-serif text-2xl font-bold mb-8">회원가입</h1>
+    <div className="mx-auto max-w-md px-4 py-20">
+      <div className="rounded-[32px] border border-neutral-200 bg-white p-8 shadow-sm">
+      <h1 className="mb-2 text-3xl font-semibold tracking-tight text-neutral-900">회원가입</h1>
+      <p className="mb-8 text-sm text-neutral-500">한국어 버전 기준으로 역할을 선택하고 Valadde 워크스페이스를 시작하세요.</p>
       <form onSubmit={handleSubmit} className="space-y-5">
         <input
           type="email"
           placeholder="이메일"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-3 py-2 bg-abu-charcoal border border-abu-gray rounded text-white placeholder-white/40 focus:outline-none focus:border-abu-pink/50"
+          className="w-full rounded-2xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none"
           required
         />
         <input
@@ -51,7 +53,7 @@ export default function SignupPage() {
           placeholder="비밀번호 (6자 이상)"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-3 py-2 bg-abu-charcoal border border-abu-gray rounded text-white placeholder-white/40 focus:outline-none focus:border-abu-pink/50"
+          className="w-full rounded-2xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none"
           minLength={6}
           required
         />
@@ -60,28 +62,29 @@ export default function SignupPage() {
           placeholder="이름"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          className="w-full px-3 py-2 bg-abu-charcoal border border-abu-gray rounded text-white placeholder-white/40 focus:outline-none focus:border-abu-pink/50"
+          className="w-full rounded-2xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none"
         />
         <div>
-          <label className="block text-sm font-medium mb-2 text-white/90">회원 유형</label>
+          <label className="mb-2 block text-sm font-medium text-neutral-900">회원 유형</label>
           <select
             value={userType}
             onChange={(e) => setUserType(e.target.value as 'creator' | 'buyer' | 'brand')}
-            className="w-full px-3 py-2 bg-abu-charcoal border border-abu-gray rounded text-white focus:outline-none focus:border-abu-pink/50"
+            className="w-full rounded-2xl border border-neutral-300 px-4 py-3 text-neutral-900 focus:border-neutral-500 focus:outline-none"
           >
-            <option value="creator" className="bg-abu-dark">크리에이터</option>
-            <option value="buyer" className="bg-abu-dark">바이어</option>
-            <option value="brand" className="bg-abu-dark">브랜드</option>
+            <option value="creator">크리에이터</option>
+            <option value="buyer">바이어</option>
+            <option value="brand">브랜드</option>
           </select>
         </div>
-        {error && <p className="text-abu-pink text-sm">{error}</p>}
-        <button type="submit" className="w-full py-3 bg-abu-pink text-abu-dark rounded font-medium hover:bg-abu-pink-dark">
+        {error && <p className="text-sm text-red-600">{error}</p>}
+        <button type="submit" className="w-full rounded-full bg-neutral-900 py-3 font-medium text-white hover:bg-neutral-700">
           가입하기
         </button>
       </form>
-      <p className="mt-6 text-sm text-white/60">
-        이미 계정이 있으신가요? <Link href="/login" className="text-abu-pink hover:underline">로그인</Link>
+      <p className="mt-6 text-sm text-neutral-500">
+        이미 계정이 있으신가요? <Link href="/login" className="text-neutral-900 hover:underline">로그인</Link>
       </p>
+      </div>
     </div>
   )
 }

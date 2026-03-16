@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createSupabaseClient } from '@/lib/supabase-client'
+import MemberPageIntro from '@/components/member/MemberPageIntro'
 
 type Product = { id: string; name: string; wholesale_price: number | null; price: number | null }
 type CartItem = { product_id: string; name: string; qty: number; unit_price: number }
@@ -114,21 +115,22 @@ export default function BuyerPOFormPage() {
   const total = cart.reduce((s, c) => s + c.qty * c.unit_price, 0)
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <h1 className="text-2xl font-bold mb-6">PO 작성</h1>
-      <p className="text-gray-600 mb-8">
-        상품을 선택하고 수량을 입력한 후 제출하세요.
-      </p>
+    <div className="mx-auto max-w-6xl px-4 py-10">
+      <MemberPageIntro
+        title="Purchase Orders"
+        description="선택한 상품으로 구매 의사서를 정리하고, 수량과 요청사항을 함께 제출하세요."
+      />
 
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="bg-white rounded-lg shadow p-6 border">
-          <h2 className="font-semibold mb-3">상품 선택</h2>
+      <form onSubmit={handleSubmit} className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-neutral-900">Review Items</h2>
+          <p className="mt-2 text-sm text-neutral-500">구매 대상 상품을 추가하고 수량을 조정하세요.</p>
           <select
             onChange={(e) => {
               const p = products.find((x) => x.id === e.target.value)
               if (p) addItem(p)
             }}
-            className="w-full px-3 py-2 border rounded"
+            className="mt-4 w-full rounded-2xl border border-neutral-300 px-4 py-3 text-sm"
           >
             <option value="">상품 선택...</option>
             {products.map((p) => (
@@ -139,9 +141,9 @@ export default function BuyerPOFormPage() {
           </select>
 
           {cart.length > 0 && (
-            <div className="mt-4 border rounded overflow-hidden">
+            <div className="mt-4 overflow-hidden rounded-[24px] border border-neutral-200">
               <table className="w-full text-sm">
-                <thead className="bg-gray-50">
+                <thead className="bg-neutral-50">
                   <tr>
                     <th className="px-3 py-2 text-left">상품</th>
                     <th className="px-3 py-2 text-right w-24">수량</th>
@@ -152,7 +154,7 @@ export default function BuyerPOFormPage() {
                 </thead>
                 <tbody>
                   {cart.map((c) => (
-                    <tr key={c.product_id} className="border-t">
+                    <tr key={c.product_id} className="border-t border-neutral-200">
                       <td className="px-3 py-2">{c.name}</td>
                       <td className="px-3 py-2 text-right">
                         <input
@@ -160,7 +162,7 @@ export default function BuyerPOFormPage() {
                           min={1}
                           value={c.qty}
                           onChange={(e) => updateQty(c.product_id, Number(e.target.value))}
-                          className="w-16 px-2 py-1 border rounded text-right"
+                          className="w-16 rounded-xl border border-neutral-300 px-2 py-1 text-right"
                         />
                       </td>
                       <td className="px-3 py-2 text-right">{c.unit_price.toLocaleString()}원</td>
@@ -169,7 +171,7 @@ export default function BuyerPOFormPage() {
                         <button
                           type="button"
                           onClick={() => updateQty(c.product_id, 0)}
-                          className="text-red-600 text-xs"
+                          className="text-xs text-red-600"
                         >
                           삭제
                         </button>
@@ -178,34 +180,37 @@ export default function BuyerPOFormPage() {
                   ))}
                 </tbody>
               </table>
-              <p className="p-3 text-right font-semibold border-t">합계: {total.toLocaleString()}원</p>
+              <p className="border-t border-neutral-200 p-3 text-right font-semibold">합계: {total.toLocaleString()}원</p>
             </div>
           )}
         </div>
 
-        <div>
-          <label className="block text-sm font-medium mb-1">메모</label>
-          <textarea
-            value={memo}
-            onChange={(e) => setMemo(e.target.value)}
-            className="w-full px-3 py-2 border rounded h-20"
-            placeholder="배송지, 요청사항 등"
-          />
-        </div>
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-neutral-900">PO Details</h2>
+          <div className="mt-4">
+            <label className="mb-2 block text-sm font-medium text-neutral-900">메모</label>
+            <textarea
+              value={memo}
+              onChange={(e) => setMemo(e.target.value)}
+              className="h-32 w-full rounded-2xl border border-neutral-300 px-4 py-3 text-sm"
+              placeholder="배송지, 요청사항, 인보이스 관련 메모 등을 입력하세요."
+            />
+          </div>
 
-        {msg && <p className={`text-sm ${msg.includes('오류') ? 'text-red-600' : 'text-green-600'}`}>{msg}</p>}
+          {msg && <p className={`mt-4 text-sm ${msg.includes('오류') ? 'text-red-600' : 'text-emerald-600'}`}>{msg}</p>}
 
-        <div className="flex gap-3">
-          <button
-            type="submit"
-            disabled={sending || cart.length === 0}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-          >
-            {sending ? '제출 중...' : 'PO 제출'}
-          </button>
-          <Link href="/products" className="px-4 py-2 border rounded hover:bg-gray-50">
-            상품 더 보기
-          </Link>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <button
+              type="submit"
+              disabled={sending || cart.length === 0}
+              className="rounded-full bg-neutral-900 px-5 py-3 text-sm font-medium text-white hover:bg-neutral-700 disabled:opacity-50"
+            >
+              {sending ? '제출 중...' : 'PO 제출'}
+            </button>
+            <Link href="/products" className="rounded-full border border-neutral-300 px-5 py-3 text-sm hover:bg-neutral-50">
+              상품 더 보기
+            </Link>
+          </div>
         </div>
       </form>
     </div>

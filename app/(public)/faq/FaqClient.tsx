@@ -34,12 +34,12 @@ export default function FaqClient({ initialFaqs }: { initialFaqs: Faq[] }) {
             value={q}
             onChange={(e) => setQ(e.target.value)}
             placeholder="검색어 입력"
-            className="flex-1 px-3 py-2 bg-abu-charcoal border border-abu-gray rounded text-white placeholder-white/40 focus:outline-none focus:border-abu-pink/50"
+            className="flex-1 rounded-2xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none"
           />
           <button
             type="submit"
             disabled={searching}
-            className="px-4 py-2 bg-abu-pink text-abu-dark rounded hover:bg-abu-pink-dark font-medium disabled:opacity-50"
+            className="rounded-full bg-neutral-900 px-4 py-2 text-white hover:bg-neutral-700 disabled:opacity-50"
           >
             검색
           </button>
@@ -50,7 +50,7 @@ export default function FaqClient({ initialFaqs }: { initialFaqs: Faq[] }) {
                 setQ('')
                 setFaqs(initialFaqs)
               }}
-              className="px-4 py-2 border border-abu-gray rounded hover:bg-abu-gray/30 text-white/90"
+              className="rounded-full border border-neutral-300 px-4 py-2 text-neutral-700 hover:bg-neutral-50"
             >
               초기화
             </button>
@@ -58,16 +58,16 @@ export default function FaqClient({ initialFaqs }: { initialFaqs: Faq[] }) {
         </div>
       </form>
 
-      <ul className="divide-y divide-abu-gray border border-abu-gray rounded-lg overflow-hidden">
+      <ul className="overflow-hidden rounded-[28px] border border-neutral-200 divide-y divide-neutral-200 bg-white shadow-sm">
         {faqs.length === 0 ? (
-          <li className="p-8 text-center text-white/60">
+          <li className="p-8 text-center text-neutral-500">
             {q ? '검색 결과가 없습니다.' : '등록된 FAQ가 없습니다.'}
           </li>
         ) : (
           faqs.map((faq) => (
-            <li key={faq.id} className="p-4">
-              <p className="font-medium">{faq.question}</p>
-              <p className="mt-2 text-white/70 text-sm whitespace-pre-wrap">{faq.answer}</p>
+            <li key={faq.id} className="p-5">
+              <p className="font-medium text-neutral-900">{faq.question}</p>
+              <p className="mt-2 whitespace-pre-wrap text-sm leading-6 text-neutral-600">{faq.answer}</p>
             </li>
           ))
         )}

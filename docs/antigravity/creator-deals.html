@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deals | Valadde Creator Area</title>
+    <meta name="description" content="Track inquiries, negotiations, and next actions for your active deal requests in the Valadde Creator Area.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body class="workspace-body deals-page-body">
+
+    <!-- ================================================================
+         GLOBAL HEADER
+         ================================================================ -->
+    <header class="header" id="header">
+        <div class="header-container container">
+            <a href="index.html" class="logo">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img">
+            </a>
+
+            <nav class="nav" id="main-nav">
+                <ul class="nav-list">
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="index.html#creators" class="nav-link active fw-600 text-main">For Creators</a></li>
+                    <li><a href="index.html#buyers" class="nav-link">For Buyers</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-text btn-sm">Log In</button>
+                    <button class="btn btn-primary btn-sm">Sign Up</button>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><i class="ri-menu-line"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 62px;">
+
+        <!-- ================================================================
+             CREATOR AREA SUB-NAVIGATION
+             ================================================================ -->
+        <div class="creator-subnav">
+            <div class="container max-w-5xl subnav-container">
+                <div class="subnav-tabs">
+                    <a href="#" class="subnav-tab">My Page</a>
+                    <a href="selected-products.html" class="subnav-tab">Selected Products</a>
+                    <a href="creator-deals.html" class="subnav-tab active">Deals</a>
+                    <a href="#" class="subnav-tab">Payments</a>
+                    <a href="#" class="subnav-tab">Deliveries</a>
+                    <a href="#" class="subnav-tab">Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PAGE CONTENT WRAPPER
+             ================================================================ -->
+        <div class="container max-w-5xl" style="padding-top: 2.5rem; padding-bottom: 6rem;">
+
+            <!-- Page Intro -->
+            <div class="workspace-header" style="margin-bottom: 2rem;">
+                <h1 class="deals-page-title">Deals</h1>
+                <p class="deals-page-subtitle">Track inquiries, negotiations, and next actions for your active deal requests.</p>
+            </div>
+
+            <!-- ================================================================
+                 DEALS INTERNAL TABS (Stage Navigation)
+                 ================================================================ -->
+            <div class="deals-stage-tabs-wrap">
+                <div class="deals-stage-tabs" id="deals-stage-tabs">
+                    <button class="stage-tab active" data-stage="active">Active Deals</button>
+                    <button class="stage-tab" data-stage="quotations">Quotations</button>
+                    <button class="stage-tab" data-stage="purchase-orders">Purchase Orders</button>
+                    <button class="stage-tab" data-stage="invoices">Invoices</button>
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 FILTER / SEARCH / SORT ROW
+                 ================================================================ -->
+            <div class="deals-filter-bar">
+                <!-- Status Filters -->
+                <div class="deals-status-filters" id="deals-status-filters">
+                    <button class="status-filter-pill active" data-filter="all">All</button>
+                    <button class="status-filter-pill" data-filter="action-needed">Action Needed</button>
+                    <button class="status-filter-pill" data-filter="negotiating">Negotiating</button>
+                    <button class="status-filter-pill" data-filter="quote-ready">Quote Ready</button>
+                    <button class="status-filter-pill" data-filter="closed">Closed</button>
+                </div>
+
+                <!-- Search + Sort -->
+                <div class="deals-filter-right">
+                    <div class="deals-search-wrap">
+                        <i class="ri-search-line"></i>
+                        <input type="text" class="deals-search-input" id="deals-search" placeholder="Search deals…">
+                    </div>
+                    <select class="deals-sort-select" id="deals-sort">
+                        <option value="latest">Latest Activity</option>
+                        <option value="newest">Newest First</option>
+                        <option value="status">By Status</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 ACTIVE DEALS LIST
+                 ================================================================ -->
+            <div class="deals-list" id="deals-list">
+
+                <!-- ── Deal 1: Negotiating ── -->
+                <article class="deal-row-card" data-status="negotiating">
+                    <!-- LEFT: Product identity -->
+                    <div class="deal-product-col">
+                        <div class="deal-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&q=80&w=160&h=160" alt="Luminous Silk Foundation">
+                        </div>
+                        <div class="deal-text-info">
+                            <span class="deal-brand">AURA BEAUTY</span>
+                            <h3 class="deal-title">Luminous Silk Foundation – 30ml</h3>
+                            <div class="deal-meta-specs">
+                                <span class="meta-tag"><i class="ri-box-3-line"></i> MOQ 500</span>
+                                <span class="meta-tag"><i class="ri-instagram-line"></i> Instagram Live</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER: Status & update -->
+                    <div class="deal-status-col">
+                        <span class="status-badge status-negotiating">Negotiating</span>
+                        <p class="status-note"><i class="ri-message-3-line"></i> Brand replied with a revised pricing tier for 500+ units.</p>
+                        <span class="status-date">Updated 2 hours ago</span>
+                    </div>
+
+                    <!-- RIGHT: Next action -->
+                    <div class="deal-actions-col">
+                        <button class="btn btn-dark btn-sm btn-full deal-primary-action">Continue <i class="ri-arrow-right-line"></i></button>
+                        <button class="btn btn-outline btn-sm btn-full deal-secondary-action">View Deal</button>
+                    </div>
+                </article>
+
+                <!-- ── Deal 2: Ready for Quote ── -->
+                <article class="deal-row-card" data-status="quote-ready">
+                    <!-- LEFT: Product identity -->
+                    <div class="deal-product-col">
+                        <div class="deal-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1599305090598-fe179d501227?auto=format&fit=crop&q=80&w=160&h=160" alt="Deep Hydration Serum Set">
+                        </div>
+                        <div class="deal-text-info">
+                            <span class="deal-brand">LUMINA</span>
+                            <h3 class="deal-title">Deep Hydration Serum Set</h3>
+                            <div class="deal-meta-specs">
+                                <span class="meta-tag"><i class="ri-hand-coin-line"></i> Negotiable</span>
+                                <span class="meta-tag"><i class="ri-global-line"></i> EU Compliant</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER: Status & update -->
+                    <div class="deal-status-col">
+                        <span class="status-badge status-ready">Ready for Quote</span>
+                        <p class="status-note"><i class="ri-file-list-3-line"></i> Terms agreed. Awaiting your formal quote request to proceed.</p>
+                        <span class="status-date">Updated yesterday</span>
+                    </div>
+
+                    <!-- RIGHT: Next action -->
+                    <div class="deal-actions-col">
+                        <button class="btn btn-primary btn-sm btn-full deal-primary-action">Request Quote <i class="ri-arrow-right-line"></i></button>
+                        <button class="btn btn-outline btn-sm btn-full deal-secondary-action">Review Details</button>
+                    </div>
+                </article>
+
+                <!-- ── Deal 3: Action Needed — New Inquiry ── -->
+                <article class="deal-row-card deal-row-card--highlight" data-status="action-needed">
+                    <!-- LEFT: Product identity -->
+                    <div class="deal-product-col">
+                        <div class="deal-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1570194065650-d99fb4b8f70d?auto=format&fit=crop&q=80&w=160&h=160" alt="Gentle Botanical Cleanser">
+                        </div>
+                        <div class="deal-text-info">
+                            <span class="deal-brand">NATURE LAB</span>
+                            <h3 class="deal-title">Gentle Botanical Cleanser</h3>
+                            <div class="deal-meta-specs">
+                                <span class="meta-tag"><i class="ri-leaf-line"></i> Clean Beauty</span>
+                                <span class="meta-tag"><i class="ri-youtube-line"></i> YouTube</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER: Status & update -->
+                    <div class="deal-status-col">
+                        <span class="status-badge status-new">New Inquiry</span>
+                        <p class="status-note"><i class="ri-mail-send-line"></i> Brand reached out to propose a collaboration — response needed.</p>
+                        <span class="status-date">Updated 3 days ago</span>
+                    </div>
+
+                    <!-- RIGHT: Next action -->
+                    <div class="deal-actions-col">
+                        <button class="btn btn-primary btn-sm btn-full deal-primary-action">Respond <i class="ri-arrow-right-line"></i></button>
+                        <button class="btn btn-outline btn-sm btn-full deal-secondary-action">Review Details</button>
+                    </div>
+                </article>
+
+                <!-- ── Deal 4: Awaiting Reply ── -->
+                <article class="deal-row-card" data-status="negotiating">
+                    <!-- LEFT: Product identity -->
+                    <div class="deal-product-col">
+                        <div class="deal-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1629198688000-71f23e745b6e?auto=format&fit=crop&q=80&w=160&h=160" alt="Signature Matte Lip Kit">
+                        </div>
+                        <div class="deal-text-info">
+                            <span class="deal-brand">VELVET KISS</span>
+                            <h3 class="deal-title">Signature Matte Lip Kit – 5 Colors</h3>
+                            <div class="deal-meta-specs">
+                                <span class="meta-tag"><i class="ri-box-3-line"></i> MOQ 500</span>
+                                <span class="meta-tag"><i class="ri-tiktok-line"></i> TikTok Shop</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER: Status & update -->
+                    <div class="deal-status-col">
+                        <span class="status-badge status-awaiting">Awaiting Reply</span>
+                        <p class="status-note"><i class="ri-time-line"></i> You sent an inquiry for sample delivery options — waiting on brand.</p>
+                        <span class="status-date">Updated 2 days ago</span>
+                    </div>
+
+                    <!-- RIGHT: Next action -->
+                    <div class="deal-actions-col">
+                        <button class="btn btn-outline btn-sm btn-full deal-primary-action dark-outline">View Deal</button>
+                    </div>
+                </article>
+
+                <!-- ── Deal 5: Closed ── -->
+                <article class="deal-row-card deal-row-card--muted" data-status="closed">
+                    <!-- LEFT: Product identity -->
+                    <div class="deal-product-col">
+                        <div class="deal-img-wrap">
+                            <img src="https://images.unsplash.com/photo-1614267157481-ca2b81ac6fcc?auto=format&fit=crop&q=80&w=160&h=160" alt="Rose Gold Highlighter">
+                        </div>
+                        <div class="deal-text-info">
+                            <span class="deal-brand">GLOW CO.</span>
+                            <h3 class="deal-title">Rose Gold Highlighter Palette</h3>
+                            <div class="deal-meta-specs">
+                                <span class="meta-tag"><i class="ri-box-3-line"></i> MOQ 200</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CENTER: Status & update -->
+                    <div class="deal-status-col">
+                        <span class="status-badge status-closed">Closed</span>
+                        <p class="status-note"><i class="ri-checkbox-circle-line"></i> Deal completed. Final terms archived.</p>
+                        <span class="status-date">Updated 1 week ago</span>
+                    </div>
+
+                    <!-- RIGHT: Next action -->
+                    <div class="deal-actions-col">
+                        <button class="btn btn-outline btn-sm btn-full deal-primary-action">View Archive</button>
+                    </div>
+                </article>
+
+            </div><!-- /deals-list -->
+
+            <!-- Load More -->
+            <div class="deals-load-more">
+                <button class="btn btn-outline bg-white deals-load-more-btn">
+                    Load More Deals
+                </button>
+            </div>
+
+        </div><!-- /container -->
+    </main>
+
+    <!-- ================================================================
+         MINIMAL FOOTER
+         ================================================================ -->
+    <footer class="footer-minimal section" style="background: white; padding-bottom: 4rem; padding-top: 2rem;">
+        <div class="container footer-bottom-bar flex-between" style="border-top: 1px solid var(--c-border); padding-top: 2rem;">
+            <div class="footer-brand">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img" style="height: 22px;">
+            </div>
+            <div class="footer-copyright" style="font-size: 0.85rem; color: var(--c-text-muted);">
+                &copy; 2026 Valadde Inc.
+            </div>
+            <div class="footer-legal-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // ── Stage Tab Switching ──
+        const stageTabs = document.querySelectorAll('.stage-tab');
+        stageTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                stageTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // ── Status Filter Pill Switching ──
+        const filterPills = document.querySelectorAll('.status-filter-pill');
+        const dealRows = document.querySelectorAll('.deal-row-card');
+
+        filterPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                filterPills.forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+
+                const filter = pill.dataset.filter;
+                dealRows.forEach(row => {
+                    if (filter === 'all' || row.dataset.status === filter) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // ── Search ──
+        const searchInput = document.getElementById('deals-search');
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.toLowerCase();
+            dealRows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(query) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,17 +1,42 @@
-import { supabase } from '@/lib/supabase'
-import { notFound } from 'next/navigation'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import { supabase } from '@/lib/supabase'
 
-export default async function ProductDetailPage({
-  params,
-}: {
-  params: Promise<{ id: string }>
-}) {
+type ProductDetailPageProps = {
+  params: Promise<{
+    id: string
+  }>
+}
+
+function getImageSrc(images: string[] | string | null | undefined) {
+  if (!images) return null
+  if (Array.isArray(images)) return images[0] || null
+  if (typeof images === 'string') return images
+  return null
+}
+
+export default async function ProductDetailPage({ params }: ProductDetailPageProps) {
   const { id } = await params
 
   const { data: product, error } = await supabase
     .from('products')
-    .select('*')
+    .select(
+      `
+      id,
+      name,
+      name_en,
+      short_description,
+      description,
+      images,
+      brand_id,
+      category_id,
+      price,
+      promotion_price,
+      moq,
+      country_of_origin,
+      is_active
+    `
+    )
     .eq('id', id)
     .eq('is_active', true)
     .single()
@@ -20,124 +45,152 @@ export default async function ProductDetailPage({
     notFound()
   }
 
-  const [brandRes, categoryRes] = await Promise.all([
-    product.brand_id ? supabase.from('brands').select('id, name').eq('id', product.brand_id).single() : { data: null },
-    product.category_id ? supabase.from('categories').select('id, name').eq('id', product.category_id).single() : { data: null },
+  const [{ data: brand }, { data: category }] = await Promise.all([
+    supabase.from('brands').select('id, name').eq('id', product.brand_id).single(),
+    supabase.from('categories').select('id, name').eq('id', product.category_id).single(),
   ])
-  const brand = brandRes.data
-  const category = categoryRes.data
-  const specs = (product.specs as Record<string, unknown>) ?? {}
-  const images = (product.images as string[]) ?? []
+
+  const imageSrc = getImageSrc(product.images)
+
+  const text = {
+    backHref: '/products',
+    closeLabel: 'Close',
+    supplyPrice: 'SUPPLY PRICE',
+    moq: 'MOQ',
+    exportReadiness: 'EXPORT READINESS',
+    sampleAvailability: 'SAMPLE AVAILABILITY',
+    countryOfOrigin: 'COUNTRY OF ORIGIN',
+    leadTime: 'LEAD TIME',
+    requestSample: 'Request Sample',
+    inquire: 'Inquire / Negotiate',
+    contactUs: 'Contact Us',
+    unknown: '--',
+    leadTimeValue: '14-21 Days',
+  }
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12">
-      <Link
-        href="/products"
-        className="text-white/60 hover:text-white text-sm mb-8 inline-block transition-colors"
-      >
-        ← 상품 목록
-      </Link>
-
-      <div className="grid md:grid-cols-2 gap-10">
-        {/* 이미지 */}
-        <div className="space-y-3">
-          <div
-            className="aspect-square bg-abu-gray rounded-lg bg-cover bg-center border border-abu-gray"
-            style={images[0] ? { backgroundImage: `url(${images[0]})` } : undefined}
-          />
-          {images.length > 1 && (
-            <div className="flex gap-2 overflow-x-auto">
-              {images.slice(1, 5).map((url, i) => (
-                <div
-                  key={i}
-                  className="w-20 h-20 shrink-0 bg-abu-gray rounded bg-cover border border-abu-gray"
-                  style={{ backgroundImage: `url(${url})` }}
-                />
-              ))}
-            </div>
-          )}
-        </div>
-
-        {/* 상품 정보 */}
-        <div>
-          {brand && (
-            <p className="text-sm text-white/60 mb-2">{brand.name}</p>
-          )}
-          <h1 className="font-serif text-2xl md:text-3xl font-bold mb-3">{product.name}</h1>
-          {product.name_en && (
-            <p className="text-white/70 mb-6">{product.name_en}</p>
-          )}
-          <div className="text-2xl font-semibold mb-8">
-            {product.promotion_price != null ? (
-              <>
-                <span className="text-abu-pink">{product.promotion_price.toLocaleString()}원</span>
-                {product.price != null && (
-                  <span className="text-lg line-through text-white/50 ml-2">
-                    {product.price.toLocaleString()}원
-                  </span>
+    <main className="min-h-screen bg-neutral-100">
+      <div className="mx-auto flex min-h-screen max-w-[1440px] items-center justify-center px-4 py-10 lg:px-10 lg:py-12">
+        <div className="w-full max-w-[960px] overflow-hidden rounded-[20px] bg-white shadow-[0_18px_40px_rgba(15,23,42,0.18)]">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+            {/* Left Image Panel */}
+            <div className="relative bg-neutral-100">
+              <div className="relative aspect-[4/5] h-full min-h-[360px] w-full">
+                {imageSrc ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={imageSrc} alt={product.name} className="h-full w-full object-cover" />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-neutral-100 text-sm text-neutral-400">
+                    No image
+                  </div>
                 )}
-              </>
-            ) : product.price != null ? (
-              `${product.price.toLocaleString()}원`
-            ) : (
-              '가격 문의'
-            )}
-          </div>
-          {product.short_description && (
-            <p className="text-white/80 mb-8">{product.short_description}</p>
-          )}
-
-          {/* CTA */}
-          <div className="flex flex-wrap gap-3 mb-10">
-            <Link
-              href={`/creator/sale-request?productId=${product.id}`}
-              className="px-5 py-3 bg-abu-pink text-abu-dark rounded-lg hover:bg-abu-pink-dark font-medium transition-colors"
-            >
-              판매 의사 신청 (크리에이터)
-            </Link>
-            <Link
-              href={`/buyer/po?productId=${product.id}`}
-              className="px-5 py-3 border border-abu-pink text-abu-pink rounded-lg hover:bg-abu-pink/10 transition-colors"
-            >
-              PO 작성 (바이어)
-            </Link>
-            <a
-              href={`mailto:contact@valadde.com?subject=검수 요청: ${product.name}`}
-              className="px-5 py-3 border border-abu-gray rounded-lg hover:bg-abu-gray/30 text-white/90 transition-colors"
-            >
-              검수 요청 (브랜드)
-            </a>
-          </div>
-
-          {/* 스펙 */}
-          {Object.keys(specs).length > 0 && (
-            <div className="border-t border-abu-gray pt-8">
-              <h2 className="font-semibold mb-4">상품 정보</h2>
-              <table className="w-full text-sm">
-                <tbody>
-                  {Object.entries(specs).map(([k, v]) => (
-                    <tr key={k} className="border-b border-abu-gray">
-                      <td className="py-3 text-white/60 w-32">{k}</td>
-                      <td className="py-3">{String(v)}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+              </div>
             </div>
-          )}
+
+            {/* Right Info Panel */}
+            <div className="relative px-6 py-7 lg:px-10 lg:py-9">
+              <Link
+                href={text.backHref}
+                aria-label={text.closeLabel}
+                className="absolute right-8 top-8 inline-flex h-10 w-10 items-center justify-center rounded-full text-neutral-700 transition-colors hover:bg-neutral-100 hover:text-neutral-900"
+              >
+                <span className="text-[30px] leading-none">×</span>
+              </Link>
+
+              <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+                {brand?.name || text.unknown}
+              </p>
+
+              <h1 className="mt-3 max-w-[480px] text-[30px] font-semibold leading-[1.2] tracking-tight text-neutral-900 lg:text-[34px]">
+                {product.name}
+              </h1>
+
+              <p className="mt-5 max-w-[520px] text-[15px] leading-relaxed text-neutral-600">
+                {product.short_description ||
+                  product.description ||
+                  product.name_en ||
+                  text.unknown}
+              </p>
+
+              <div className="my-7 border-t border-neutral-200" />
+
+              <div className="grid grid-cols-2 gap-x-8 gap-y-8">
+                <div>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+                    {text.supplyPrice}
+                  </p>
+                  <p className="mt-2 text-[16px] font-semibold text-neutral-900">
+                    {product.price ? `$${product.price}` : text.contactUs}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+                    {text.moq}
+                  </p>
+                  <p className="mt-2 text-[16px] font-semibold text-neutral-900">
+                    {product.moq ? product.moq.toLocaleString() : text.unknown}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+                    {text.exportReadiness}
+                  </p>
+                  <p className="mt-2 text-[16px] font-semibold text-neutral-900">
+                    {text.unknown}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+                    {text.sampleAvailability}
+                  </p>
+                  <p className="mt-2 text-[16px] font-semibold text-neutral-900">
+                    {text.unknown}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+                    {text.countryOfOrigin}
+                  </p>
+                  <p className="mt-2 text-[16px] font-semibold text-neutral-900">
+                    {product.country_of_origin || text.unknown}
+                  </p>
+                </div>
+
+                <div>
+                  <p className="text-[12px] font-semibold uppercase tracking-[0.12em] text-neutral-400">
+                    {text.leadTime}
+                  </p>
+                  <p className="mt-2 text-[16px] font-semibold text-neutral-900">
+                    {text.leadTimeValue}
+                  </p>
+                </div>
+              </div>
+
+              <div className="my-7 border-t border-neutral-200" />
+
+              <div className="flex flex-col gap-3 sm:flex-row">
+                <button
+                  type="button"
+                  className="inline-flex min-h-[56px] flex-1 items-center justify-center rounded-full border border-neutral-200 bg-white px-7 text-[15px] font-medium text-neutral-800 transition-colors hover:bg-neutral-50"
+                >
+                  {text.requestSample}
+                </button>
+
+                <button
+                  type="button"
+                  className="inline-flex min-h-[56px] flex-1 items-center justify-center rounded-full bg-gradient-to-r from-violet-500 to-pink-500 px-7 text-[15px] font-semibold text-white transition-opacity hover:opacity-90"
+                >
+                  {text.inquire}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-
-      {/* 상세 설명 */}
-      {product.description && (
-        <div className="mt-16 border-t border-abu-gray pt-10">
-          <h2 className="font-semibold mb-6">상세 설명</h2>
-          <div
-            className="prose prose-invert max-w-none prose-headings:text-white prose-p:text-white/80 prose-li:text-white/80"
-            dangerouslySetInnerHTML={{ __html: product.description }}
-          />
-        </div>
-      )}
-    </div>
+    </main>
   )
 }

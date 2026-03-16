@@ -29,66 +29,66 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="max-w-2xl mx-auto px-4 py-12">
-      <h1 className="font-serif text-2xl md:text-3xl font-bold mb-2">문의</h1>
-      <p className="text-white/70 mb-10">서비스 이용 문의, 협업 제안 등 편하게 남겨 주세요.</p>
+    <div className="mx-auto max-w-3xl px-4 py-12">
+      <h1 className="mb-2 text-4xl font-semibold tracking-tight text-neutral-900">문의</h1>
+      <p className="mb-10 text-base leading-7 text-neutral-600">서비스 이용 문의, 협업 제안, 운영 관련 질문을 남겨 주세요.</p>
 
       <div className="mb-10">
-        <h2 className="text-sm font-medium text-white/60 mb-1">이메일</h2>
-        <a href="mailto:contact@valadde.com" className="text-abu-pink hover:underline">
+        <h2 className="mb-1 text-sm font-medium text-neutral-500">이메일</h2>
+        <a href="mailto:contact@valadde.com" className="text-neutral-900 hover:underline">
           contact@valadde.com
         </a>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-5 bg-abu-charcoal border border-abu-gray rounded-lg p-6">
+      <form onSubmit={handleSubmit} className="space-y-5 rounded-[32px] border border-neutral-200 bg-white p-6 shadow-sm">
         <div>
-          <label className="block text-sm font-medium mb-2 text-white/90">이름 *</label>
+          <label className="mb-2 block text-sm font-medium text-neutral-900">이름 *</label>
           <input
             type="text"
             value={form.name}
             onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-            className="w-full px-3 py-2 bg-abu-dark border border-abu-gray rounded text-white placeholder-white/40 focus:outline-none focus:border-abu-pink/50"
+            className="w-full rounded-2xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2 text-white/90">이메일 *</label>
+          <label className="mb-2 block text-sm font-medium text-neutral-900">이메일 *</label>
           <input
             type="email"
             value={form.email}
             onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-            className="w-full px-3 py-2 bg-abu-dark border border-abu-gray rounded text-white placeholder-white/40 focus:outline-none focus:border-abu-pink/50"
+            className="w-full rounded-2xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2 text-white/90">제목</label>
+          <label className="mb-2 block text-sm font-medium text-neutral-900">제목</label>
           <input
             type="text"
             value={form.subject}
             onChange={(e) => setForm((f) => ({ ...f, subject: e.target.value }))}
-            className="w-full px-3 py-2 bg-abu-dark border border-abu-gray rounded text-white placeholder-white/40 focus:outline-none focus:border-abu-pink/50"
+            className="w-full rounded-2xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none"
             placeholder="문의 유형 또는 제목"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-2 text-white/90">문의 내용 *</label>
+          <label className="mb-2 block text-sm font-medium text-neutral-900">문의 내용 *</label>
           <textarea
             value={form.message}
             onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-            className="w-full px-3 py-2 bg-abu-dark border border-abu-gray rounded text-white placeholder-white/40 focus:outline-none focus:border-abu-pink/50 h-32"
+            className="h-32 w-full rounded-2xl border border-neutral-300 px-4 py-3 text-neutral-900 placeholder:text-neutral-400 focus:border-neutral-500 focus:outline-none"
             required
           />
         </div>
         {msg && (
-          <p className={`text-sm ${msg.includes('오류') || msg.includes('실패') ? 'text-abu-pink' : 'text-green-400'}`}>
+          <p className={`text-sm ${msg.includes('오류') || msg.includes('실패') ? 'text-red-600' : 'text-emerald-600'}`}>
             {msg}
           </p>
         )}
         <button
           type="submit"
           disabled={sending}
-          className="px-5 py-3 bg-abu-pink text-abu-dark rounded-lg hover:bg-abu-pink-dark font-medium disabled:opacity-50"
+          className="rounded-full bg-neutral-900 px-5 py-3 font-medium text-white hover:bg-neutral-700 disabled:opacity-50"
         >
           {sending ? '전송 중...' : '보내기'}
         </button>

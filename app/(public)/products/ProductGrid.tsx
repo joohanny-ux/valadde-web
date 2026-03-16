@@ -2,96 +2,130 @@
 
 import Link from 'next/link'
 
-type Product = {
+type ProductItem = {
   id: string
   name: string
-  name_en: string | null
-  price: number | null
-  promotion_price: number | null
-  images: string[] | null
-  brand_id: string
-  category_id: string
+  name_en?: string | null
+  brand_name?: string
+  category_name?: string
+  short_description?: string | null
+  price?: number | null
+  promotion_price?: number | null
+  images?: string[] | string | null
+  moq?: number | null
+  country_of_origin?: string | null
+  totalCount?: number
 }
 
-export default function ProductGrid({
-  products,
-  totalCount,
-  page,
-  totalPages,
-  searchParams = {},
-}: {
-  products: Product[]
-  totalCount: number
-  page: number
-  totalPages: number
-  searchParams?: Record<string, string>
-}) {
-  const baseParams = new URLSearchParams(searchParams)
+type ProductGridProps = {
+  products: ProductItem[]
+  totalCount?: number
+  page?: number
+  totalPages?: number
+  searchParams?: Record<string, string | undefined>
+}
 
-  function pageUrl(p: number) {
-    const p2 = new URLSearchParams(baseParams)
-    p2.set('page', String(p))
-    return `/products?${p2.toString()}`
-  }
+const text = {
+  viewDetails: 'View Details',
+  loadMore: 'Load More Products',
+  noImage: 'No image',
+}
 
+function getImageSrc(images: ProductItem['images']) {
+  if (!images) return null
+  if (Array.isArray(images)) return images[0] || null
+  if (typeof images === 'string') return images
+  return null
+}
+
+export default function ProductGrid({ products }: ProductGridProps) {
   return (
     <div>
-      <p className="text-xs text-white/60 mb-8">총 {totalCount}건</p>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-8">
-        {products.map((p) => (
-          <Link
-            key={p.id}
-            href={`/products/${p.id}`}
-            className="border border-abu-gray rounded-lg overflow-hidden hover:border-abu-pink/50 transition-colors group"
-          >
-            <div
-              className="aspect-square bg-abu-gray bg-cover bg-center"
-              style={p.images?.[0] ? { backgroundImage: `url(${p.images[0]})` } : undefined}
-            />
-            <div className="p-4">
-              <p className="font-medium text-xs line-clamp-2 group-hover:text-abu-pink transition-colors">{p.name}</p>
-              <p className="text-xs text-white/60 mt-1.5">
-                {p.promotion_price != null ? (
-                  <>
-                    <span className="text-abu-pink">{p.promotion_price.toLocaleString()}원</span>
-                    {p.price != null && (
-                      <span className="line-through ml-1 text-xs text-white/50">{p.price.toLocaleString()}</span>
-                    )}
-                  </>
-                ) : p.price != null ? (
-                  `${p.price.toLocaleString()}원`
-                ) : (
-                  '문의'
-                )}
-              </p>
-            </div>
-          </Link>
-        ))}
+      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        {products.map((product) => {
+          const imageSrc = getImageSrc(product.images)
+
+          return (
+            <article
+              key={product.id}
+              className="overflow-hidden rounded-[20px] border border-neutral-200 bg-white shadow-[0_1px_2px_rgba(16,24,40,0.03)]"
+            >
+              <div className="relative">
+                <div className="aspect-[4/4.5] overflow-hidden bg-neutral-100">
+                  {imageSrc ? (
+                    <img
+                      src={imageSrc}
+                      alt={product.name}
+                      className="h-full w-full object-cover"
+                    />
+                  ) : (
+                    <div className="flex h-full items-center justify-center text-sm text-neutral-400">
+                      {text.noImage}
+                    </div>
+                  )}
+                </div>
+
+                <div className="pointer-events-none absolute left-3 top-3 flex items-center gap-2">
+                  {product.category_name ? (
+                    <span className="rounded-full bg-violet-100 px-2.5 py-1 text-[11px] font-semibold text-violet-600">
+                      {product.category_name}
+                    </span>
+                  ) : null}
+
+                  {product.moq ? (
+                    <span className="rounded-full bg-neutral-900 px-2.5 py-1 text-[11px] font-semibold text-white">
+                      MOQ {product.moq}
+                    </span>
+                  ) : null}
+                </div>
+
+                <button
+                  type="button"
+                  className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 bg-white/90 text-neutral-500"
+                  aria-label="Favorite"
+                >
+                  ♡
+                </button>
+              </div>
+
+              <div className="px-4 pb-4 pt-3">
+                <p className="text-[11px] font-semibold uppercase tracking-wide text-neutral-400">
+                  {product.brand_name || '--'}
+                </p>
+
+                <h3 className="mt-1 text-[22px] font-semibold leading-7 tracking-tight text-neutral-900">
+                  {product.name}
+                </h3>
+
+                <p className="mt-2 min-h-[44px] text-[13px] leading-6 text-neutral-500">
+                  {product.short_description || product.name_en || ''}
+                </p>
+
+                <div className="mt-4 flex flex-wrap gap-x-3 gap-y-2 text-[11px] font-medium text-neutral-400">
+                  <span>{product.country_of_origin ? product.country_of_origin : 'Origin --'}</span>
+                  <span>{product.moq ? `MOQ: ${product.moq}` : 'MOQ --'}</span>
+                </div>
+
+                <Link
+                  href={`/products/${product.id}`}
+                  className="mt-5 inline-flex w-full items-center justify-center rounded-full border border-neutral-200 bg-white px-4 py-3 text-[14px] font-medium text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-neutral-900"
+                >
+                  {text.viewDetails}
+                </Link>
+              </div>
+            </article>
+          )
+        })}
       </div>
 
-      {totalPages > 1 && (
-        <div className="mt-10 flex gap-2 justify-center">
-          {page > 1 && (
-            <Link
-              href={pageUrl(page - 1)}
-              className="px-4 py-2 border border-abu-gray rounded hover:bg-abu-gray/30 text-white/90"
-            >
-              이전
-            </Link>
-          )}
-          <span className="px-4 py-2 text-white/70">
-            {page} / {totalPages}
-          </span>
-          {page < totalPages && (
-            <Link
-              href={pageUrl(page + 1)}
-              className="px-4 py-2 border border-abu-gray rounded hover:bg-abu-gray/30 text-white/90"
-            >
-              다음
-            </Link>
-          )}
-        </div>
-      )}
+      <div className="mt-10 flex justify-center">
+        <button
+          type="button"
+          className="rounded-full border border-neutral-200 bg-white px-8 py-3 text-[14px] font-medium text-neutral-700 transition-colors hover:bg-neutral-50 hover:text-neutral-900"
+        >
+          {text.loadMore}
+        </button>
+      </div>
     </div>
   )
 }

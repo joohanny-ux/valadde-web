@@ -1,7 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
+import { requireAdminRequest } from '@/lib/request-auth'
 
 export async function POST(request: NextRequest) {
+  const adminError = requireAdminRequest(request)
+  if (adminError) {
+    return adminError
+  }
+
   try {
     const formData = await request.formData()
     const file = formData.get('file') as File
@@ -11,7 +17,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: '파일 없음' }, { status: 400 })
     }
 
-    const ext = file.name.split('.').pop() || 'jpg'
+    const allowedTypes = new Set(['image/jpeg', 'image/png', 'image/webp'])
+    if (!allowedTypes.has(file.type)) {
+      return NextResponse.json({ message: '허용되지 않는 파일 형식입니다.' }, { status: 400 })
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      return NextResponse.json({ message: '파일 크기는 5MB 이하여야 합니다.' }, { status: 400 })
+    }
+
+    const ext = file.name.split('.').pop()?.replace(/[^a-zA-Z0-9]/g, '').toLowerCase() || 'jpg'
     const fileName = productId
       ? `products/${productId}/${Date.now()}.${ext}`
       : `products/${Date.now()}.${ext}`

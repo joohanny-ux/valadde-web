@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoices | Valadde Creator Area</title>
+    <meta name="description" content="Review invoices and prepare for payment submission in the Valadde Creator Area.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Remix Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
+</head>
+
+<body class="workspace-body deals-page-body">
+
+    <!-- ================================================================
+         GLOBAL HEADER
+         ================================================================ -->
+    <header class="header" id="header">
+        <div class="header-container container">
+            <a href="index.html" class="logo">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img">
+            </a>
+            <nav class="nav" id="main-nav">
+                <ul class="nav-list">
+                    <li><a href="products.html" class="nav-link">Products</a></li>
+                    <li><a href="index.html#creators" class="nav-link active fw-600 text-main">For Creators</a></li>
+                    <li><a href="index.html#buyers" class="nav-link">For Buyers</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="btn btn-text btn-sm">Log In</button>
+                    <button class="btn btn-primary btn-sm">Sign Up</button>
+                    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu"><i class="ri-menu-line"></i></button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main style="padding-top: 62px;">
+
+        <!-- ================================================================
+             CREATOR AREA SUB-NAVIGATION
+             ================================================================ -->
+        <div class="creator-subnav">
+            <div class="container max-w-5xl subnav-container">
+                <div class="subnav-tabs">
+                    <a href="#" class="subnav-tab">My Page</a>
+                    <a href="selected-products.html" class="subnav-tab">Selected Products</a>
+                    <a href="creator-deals.html" class="subnav-tab active">Deals</a>
+                    <a href="#" class="subnav-tab">Payments</a>
+                    <a href="#" class="subnav-tab">Deliveries</a>
+                    <a href="#" class="subnav-tab">Profile</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================================================================
+             PAGE CONTENT WRAPPER
+             ================================================================ -->
+        <div class="container max-w-5xl" style="padding-top: 2.5rem; padding-bottom: 6rem;">
+
+            <!-- Page Intro -->
+            <div class="workspace-header" style="margin-bottom: 2rem;">
+                <h1 class="deals-page-title">Deals</h1>
+                <p class="deals-page-subtitle">Review invoices and prepare for payment submission.</p>
+            </div>
+
+            <!-- ================================================================
+                 DEALS INTERNAL TABS
+                 ================================================================ -->
+            <div class="deals-stage-tabs-wrap">
+                <div class="deals-stage-tabs">
+                    <a href="creator-deals.html" class="stage-tab">Active Deals</a>
+                    <a href="deals-quotations.html" class="stage-tab">Quotations</a>
+                    <a href="deals-purchase-orders.html" class="stage-tab">Purchase Orders</a>
+                    <button class="stage-tab active" data-stage="invoices">Invoices</button>
+                </div>
+            </div>
+
+            <!-- ================================================================
+                 SEARCH / SORT ROW
+                 ================================================================ -->
+            <div class="qt-filter-bar">
+                <div class="deals-search-wrap">
+                    <i class="ri-search-line"></i>
+                    <input type="text" class="deals-search-input" id="inv-search" placeholder="Search invoice number…">
+                </div>
+                <select class="deals-sort-select" id="inv-sort">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="brand">By Brand</option>
+                </select>
+            </div>
+
+            <!-- ================================================================
+                 INVOICES LIST
+                 ================================================================ -->
+
+            <!-- Summary banner — outstanding invoices callout -->
+            <div class="inv-summary-banner">
+                <div class="inv-summary-left">
+                    <i class="ri-file-list-3-line"></i>
+                    <span>2 invoices are ready for payment</span>
+                </div>
+                <a href="#" class="inv-summary-link">Go to Payments <i class="ri-arrow-right-line"></i></a>
+            </div>
+
+            <!-- Column header row -->
+            <div class="inv-col-header">
+                <span class="inv-col inv-col--id">Invoice</span>
+                <span class="inv-col inv-col--date">Date</span>
+                <span class="inv-col inv-col--context">Deal / Product</span>
+                <span class="inv-col inv-col--right">Status &amp; Action</span>
+            </div>
+
+            <div class="inv-list" id="inv-list">
+
+                <!-- ── INV-001: Ready for Payment ── -->
+                <article class="inv-row inv-row--action">
+                    <div class="inv-cell inv-cell--id">
+                        <span class="inv-number">INV-2026-0041</span>
+                        <span class="inv-brand-pill">AURA BEAUTY</span>
+                    </div>
+                    <div class="inv-cell inv-cell--date">
+                        <span class="inv-date">Mar 15, 2026</span>
+                        <span class="inv-ref">PO-2026-0041</span>
+                    </div>
+                    <div class="inv-cell inv-cell--context">
+                        <span class="inv-product-name">Luminous Silk Foundation – 30ml</span>
+                        <span class="inv-deal-ref">Deal #D-0041 · Instagram Live Campaign</span>
+                    </div>
+                    <div class="inv-cell inv-cell--right">
+                        <span class="inv-status-badge inv-status--ready">Ready for Payment</span>
+                        <button class="inv-action-btn inv-action-btn--pay">
+                            <i class="ri-bank-card-line"></i> Proceed to Payment
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ── INV-002: Ready for Payment ── -->
+                <article class="inv-row inv-row--action">
+                    <div class="inv-cell inv-cell--id">
+                        <span class="inv-number">INV-2026-0038</span>
+                        <span class="inv-brand-pill">LUMINA</span>
+                    </div>
+                    <div class="inv-cell inv-cell--date">
+                        <span class="inv-date">Mar 13, 2026</span>
+                        <span class="inv-ref">PO-2026-0038</span>
+                    </div>
+                    <div class="inv-cell inv-cell--context">
+                        <span class="inv-product-name">Deep Hydration Serum Set</span>
+                        <span class="inv-deal-ref">Deal #D-0038 · TikTok Shop Campaign</span>
+                    </div>
+                    <div class="inv-cell inv-cell--right">
+                        <span class="inv-status-badge inv-status--ready">Ready for Payment</span>
+                        <button class="inv-action-btn inv-action-btn--pay">
+                            <i class="ri-bank-card-line"></i> Proceed to Payment
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ── INV-003: Payment Pending ── -->
+                <article class="inv-row">
+                    <div class="inv-cell inv-cell--id">
+                        <span class="inv-number">INV-2026-0035</span>
+                        <span class="inv-brand-pill">VELVET KISS</span>
+                    </div>
+                    <div class="inv-cell inv-cell--date">
+                        <span class="inv-date">Mar 10, 2026</span>
+                        <span class="inv-ref">PO-2026-0035</span>
+                    </div>
+                    <div class="inv-cell inv-cell--context">
+                        <span class="inv-product-name">Signature Matte Lip Kit – 5 Colors</span>
+                        <span class="inv-deal-ref">Deal #D-0035 · YouTube Review Campaign</span>
+                    </div>
+                    <div class="inv-cell inv-cell--right">
+                        <span class="inv-status-badge inv-status--pending">Payment Pending</span>
+                        <button class="inv-action-btn">
+                            <i class="ri-download-2-line"></i> Download Invoice
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ── INV-004: Payment Pending ── -->
+                <article class="inv-row">
+                    <div class="inv-cell inv-cell--id">
+                        <span class="inv-number">INV-2026-0027</span>
+                        <span class="inv-brand-pill">MARINE</span>
+                    </div>
+                    <div class="inv-cell inv-cell--date">
+                        <span class="inv-date">Mar 5, 2026</span>
+                        <span class="inv-ref">PO-2026-0027</span>
+                    </div>
+                    <div class="inv-cell inv-cell--context">
+                        <span class="inv-product-name">Deep Sea Exfoliating Scrub</span>
+                        <span class="inv-deal-ref">Deal #D-0027 · Instagram Live</span>
+                    </div>
+                    <div class="inv-cell inv-cell--right">
+                        <span class="inv-status-badge inv-status--pending">Payment Pending</span>
+                        <button class="inv-action-btn">
+                            <i class="ri-download-2-line"></i> Download Invoice
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ── INV-005: Paid ── -->
+                <article class="inv-row">
+                    <div class="inv-cell inv-cell--id">
+                        <span class="inv-number">INV-2026-0021</span>
+                        <span class="inv-brand-pill">PETAL</span>
+                    </div>
+                    <div class="inv-cell inv-cell--date">
+                        <span class="inv-date">Feb 25, 2026</span>
+                        <span class="inv-ref">PO-2026-0021</span>
+                    </div>
+                    <div class="inv-cell inv-cell--context">
+                        <span class="inv-product-name">Rose Water Calming Toner</span>
+                        <span class="inv-deal-ref">Deal #D-0021 · Community Group Buy</span>
+                    </div>
+                    <div class="inv-cell inv-cell--right">
+                        <span class="inv-status-badge inv-status--paid">Paid</span>
+                        <button class="inv-action-btn">
+                            <i class="ri-download-2-line"></i> Download Invoice
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ── INV-006: Paid ── -->
+                <article class="inv-row">
+                    <div class="inv-cell inv-cell--id">
+                        <span class="inv-number">INV-2026-0018</span>
+                        <span class="inv-brand-pill">GLOW CO.</span>
+                    </div>
+                    <div class="inv-cell inv-cell--date">
+                        <span class="inv-date">Feb 20, 2026</span>
+                        <span class="inv-ref">PO-2026-0018</span>
+                    </div>
+                    <div class="inv-cell inv-cell--context">
+                        <span class="inv-product-name">Rose Gold Highlighter Palette</span>
+                        <span class="inv-deal-ref">Deal #D-0018 · YouTube Deal Completed</span>
+                    </div>
+                    <div class="inv-cell inv-cell--right">
+                        <span class="inv-status-badge inv-status--paid">Paid</span>
+                        <button class="inv-action-btn">
+                            <i class="ri-download-2-line"></i> Download Invoice
+                        </button>
+                    </div>
+                </article>
+
+                <!-- ── INV-007: Cancelled ── -->
+                <article class="inv-row inv-row--muted">
+                    <div class="inv-cell inv-cell--id">
+                        <span class="inv-number">INV-2026-0019</span>
+                        <span class="inv-brand-pill">NATURE LAB</span>
+                    </div>
+                    <div class="inv-cell inv-cell--date">
+                        <span class="inv-date">Feb 22, 2026</span>
+                        <span class="inv-ref">PO-2026-0019</span>
+                    </div>
+                    <div class="inv-cell inv-cell--context">
+                        <span class="inv-product-name">Gentle Botanical Cleanser</span>
+                        <span class="inv-deal-ref">Deal #D-0019 · Group Buy Campaign</span>
+                    </div>
+                    <div class="inv-cell inv-cell--right">
+                        <span class="inv-status-badge inv-status--cancelled">Cancelled</span>
+                        <button class="inv-action-ghost">View Record</button>
+                    </div>
+                </article>
+
+            </div><!-- /inv-list -->
+
+            <!-- Load More -->
+            <div class="deals-load-more">
+                <button class="btn btn-outline bg-white deals-load-more-btn">Load More</button>
+            </div>
+
+        </div><!-- /container -->
+    </main>
+
+    <!-- ================================================================
+         MINIMAL FOOTER
+         ================================================================ -->
+    <footer class="footer-minimal section" style="background: white; padding-bottom: 4rem; padding-top: 2rem;">
+        <div class="container footer-bottom-bar flex-between" style="border-top: 1px solid var(--c-border); padding-top: 2rem;">
+            <div class="footer-brand">
+                <img src="./assets/valadde-logo-dark.svg" alt="Valadde" class="logo-img" style="height: 22px;">
+            </div>
+            <div class="footer-copyright" style="font-size: 0.85rem; color: var(--c-text-muted);">
+                &copy; 2026 Valadde Inc.
+            </div>
+            <div class="footer-legal-links">
+                <a href="#">Terms</a>
+                <a href="#">Privacy</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // ── Stage Tab Switching ──
+        document.querySelectorAll('.stage-tab[data-stage]').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.stage-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // ── Live Search ──
+        const invSearch = document.getElementById('inv-search');
+        const invRows = document.querySelectorAll('.inv-row');
+        invSearch.addEventListener('input', () => {
+            const q = invSearch.value.toLowerCase();
+            invRows.forEach(row => {
+                row.style.display = row.textContent.toLowerCase().includes(q) ? '' : 'none';
+            });
+        });
+
+        // ── Sort ──
+        const invSort = document.getElementById('inv-sort');
+        const invList = document.getElementById('inv-list');
+        invSort.addEventListener('change', () => {
+            const rows = Array.from(invList.querySelectorAll('.inv-row'));
+            rows.sort((a, b) => {
+                const getDate = r => new Date(r.querySelector('.inv-date').textContent);
+                const getBrand = r => r.querySelector('.inv-brand-pill').textContent;
+                if (invSort.value === 'newest') return getDate(b) - getDate(a);
+                if (invSort.value === 'oldest') return getDate(a) - getDate(b);
+                if (invSort.value === 'brand') return getBrand(a).localeCompare(getBrand(b));
+                return 0;
+            });
+            rows.forEach(r => invList.appendChild(r));
+        });
+    </script>
+</body>
+
+</html>

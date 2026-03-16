@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { createSupabaseClient } from '@/lib/supabase-client'
+import MemberPageIntro from '@/components/member/MemberPageIntro'
 
 type Product = { id: string; name: string }
 
@@ -68,56 +69,91 @@ export default function SaleRequestPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-10">
-      <h1 className="text-2xl font-bold mb-6">판매 의사 신청</h1>
-      <p className="text-gray-600 mb-8">
-        관심 상품을 선택한 후 판매 의사·재고 문의를 보내세요.
-      </p>
+    <div className="mx-auto max-w-6xl px-4 py-10">
+      <MemberPageIntro
+        title="Selected Products"
+        description="선택한 상품을 검토하고, 요청 메시지를 정리한 뒤 크리에이터 관점의 딜 요청을 제출하세요."
+      />
 
-      <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow p-6 border max-w-xl">
-        <div className="space-y-4">
-          <div>
-            <label className="block text-sm font-medium mb-1">상품 선택 *</label>
-            <select
-              value={selectedId}
-              onChange={(e) => setSelectedId(e.target.value)}
-              className="w-full px-3 py-2 border rounded"
-              required
-            >
-              <option value="">상품 선택...</option>
-              {products.map((p) => (
-                <option key={p.id} value={p.id}>{p.name}</option>
-              ))}
-            </select>
+      <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm">
+          <div className="mb-5 flex items-center justify-between border-b border-neutral-200 pb-4">
+            <div>
+              <h2 className="text-lg font-semibold text-neutral-900">Review Items</h2>
+              <p className="mt-1 text-sm text-neutral-500">현재 선택한 상품과 요청 메시지를 정리합니다.</p>
+            </div>
+            <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600">
+              {selectedId ? '1 item selected' : 'No item'}
+            </span>
           </div>
-          <div>
-            <label className="block text-sm font-medium mb-1">메시지</label>
-            <textarea
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full px-3 py-2 border rounded h-24"
-              placeholder="재고 문의, 협상 요청 등"
-            />
-          </div>
-          {msg && (
-            <p className={`text-sm ${msg.includes('오류') ? 'text-red-600' : 'text-green-600'}`}>
-              {msg}
-            </p>
-          )}
-          <div className="flex gap-3">
-            <button
-              type="submit"
-              disabled={sending}
-              className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-            >
-              {sending ? '신청 중...' : '신청하기'}
-            </button>
-            <Link href="/products" className="px-4 py-2 border rounded hover:bg-gray-50">
-              상품 둘러보기
-            </Link>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="mb-2 block text-sm font-medium text-neutral-900">상품 선택 *</label>
+              <select
+                value={selectedId}
+                onChange={(e) => setSelectedId(e.target.value)}
+                className="w-full rounded-2xl border border-neutral-300 px-4 py-3 text-sm"
+                required
+              >
+                <option value="">상품 선택...</option>
+                {products.map((p) => (
+                  <option key={p.id} value={p.id}>
+                    {p.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div>
+              <label className="mb-2 block text-sm font-medium text-neutral-900">공통 요청사항</label>
+              <textarea
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                className="h-32 w-full rounded-2xl border border-neutral-300 px-4 py-3 text-sm"
+                placeholder="재고 문의, 샘플 요청, 협상 포인트 등을 적어 주세요."
+              />
+            </div>
+
+            {msg && (
+              <p className={`text-sm ${msg.includes('오류') ? 'text-red-600' : 'text-emerald-600'}`}>
+                {msg}
+              </p>
+            )}
+
+            <div className="flex flex-wrap gap-3">
+              <button
+                type="submit"
+                disabled={sending}
+                className="rounded-full bg-neutral-900 px-5 py-3 text-sm font-medium text-white hover:bg-neutral-700 disabled:opacity-50"
+              >
+                {sending ? '신청 중...' : '딜 요청 제출'}
+              </button>
+              <Link href="/products" className="rounded-full border border-neutral-300 px-5 py-3 text-sm hover:bg-neutral-50">
+                상품 더 보기
+              </Link>
+            </div>
+          </form>
+        </div>
+
+        <div className="rounded-[28px] border border-neutral-200 bg-white p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-neutral-900">Deal Planning</h2>
+          <div className="mt-5 space-y-4 text-sm text-neutral-600">
+            <div className="rounded-2xl bg-neutral-50 p-4">
+              <p className="font-medium text-neutral-900">캠페인 시점</p>
+              <p className="mt-2 leading-6">언제 판매를 시작할지, 필요한 수량과 리드타임을 함께 정리하면 응답 속도가 빨라집니다.</p>
+            </div>
+            <div className="rounded-2xl bg-neutral-50 p-4">
+              <p className="font-medium text-neutral-900">콘텐츠 운영 채널</p>
+              <p className="mt-2 leading-6">라이브, 숏폼, 커뮤니티 공동구매 등 운영 채널에 맞는 요청사항을 메시지에 포함하세요.</p>
+            </div>
+            <div className="rounded-2xl bg-neutral-50 p-4">
+              <p className="font-medium text-neutral-900">다음 단계</p>
+              <p className="mt-2 leading-6">제출 후에는 `Deals` 화면에서 협상, 주문, 인보이스 흐름을 이어서 관리합니다.</p>
+            </div>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   )
 }

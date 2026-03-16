@@ -12,36 +12,36 @@ export default async function NoticeListPage() {
 
   if (error) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-12">
-        <h1 className="font-serif text-2xl font-bold mb-6">공지사항</h1>
-        <p className="text-abu-pink">공지를 불러올 수 없습니다. ({error?.message ?? String(error)})</p>
+      <div className="mx-auto max-w-4xl px-4 py-12">
+        <h1 className="mb-6 text-3xl font-semibold tracking-tight text-neutral-900">공지사항</h1>
+        <p className="text-red-600">공지를 불러올 수 없습니다. ({error?.message ?? String(error)})</p>
       </div>
     )
   }
 
   return (
-    <div className="max-w-3xl mx-auto px-6 py-14">
-      <h1 className="font-serif text-xl md:text-2xl font-bold mb-10">공지사항</h1>
+    <div className="mx-auto max-w-4xl px-6 py-14">
+      <h1 className="mb-10 text-4xl font-semibold tracking-tight text-neutral-900">공지사항</h1>
 
-      <ul className="divide-y divide-abu-gray border border-abu-gray rounded-lg overflow-hidden">
+      <ul className="overflow-hidden rounded-[28px] border border-neutral-200 divide-y divide-neutral-200 bg-white shadow-sm">
         {(notices ?? []).length === 0 ? (
-          <li className="p-10 text-center text-white/60 text-sm">등록된 공지가 없습니다.</li>
+          <li className="p-10 text-center text-sm text-neutral-500">등록된 공지가 없습니다.</li>
         ) : (
           (notices ?? []).map((n) => (
             <li key={n.id}>
               <Link
                 href={`/notice/${n.id}`}
-                className="flex items-center justify-between p-4 hover:bg-abu-charcoal transition-colors text-sm"
+                className="flex items-center justify-between p-5 text-sm transition-colors hover:bg-neutral-50"
               >
                 <span className="flex items-center gap-2">
                   {n.is_pinned && (
-                    <span className="text-[10px] bg-abu-pink/20 text-abu-pink px-2 py-0.5 rounded">
+                    <span className="rounded-full bg-neutral-900 px-2 py-1 text-[10px] text-white">
                       고정
                     </span>
                   )}
                   <span className="font-medium">{n.title}</span>
                 </span>
-                <span className="text-xs text-white/60">
+                <span className="text-xs text-neutral-500">
                   {new Date(n.created_at).toLocaleDateString('ko-KR')}
                 </span>
               </Link>
